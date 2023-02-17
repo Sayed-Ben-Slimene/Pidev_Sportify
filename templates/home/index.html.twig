@@ -204,7 +204,7 @@
                                     <i class="fa fa-bars"></i>
                                 </button>
                                 <strong class="tg-logo">
-                                    <a href="index.html.twig"><img src="{{asset('asset/images/sportifyLogo.png')}}" alt="SportifyLogo"></a>
+                                    <a href="{{ path('homepage') }}"><img src="{{asset('asset/images/sportifyLogo.png')}}" alt="SportifyLogo"></a>
                                 </strong>
                             </div>
                             <div id="tg-navigation" class="tg-navigation">
@@ -494,15 +494,11 @@
                 <div class="tg-footerinfo">
                     <div class="container">
                         <div class="row">
-
                             <div class="col-sm-4">
-
-                            </div>
-                            <div class="col-sm-4" id ="contact">
                                 <div class="tg-footercol">
                                     <div class="tg-haslayout">
                                         <strong class="tg-logo">
-                                            <a href="#">
+                                            <a href="{{ path('homepage') }}">
                                                 <img src="{{asset('asset/images/sportifyLogo.png')}}" alt="image description">
                                             </a>
                                         </strong>
@@ -533,7 +529,22 @@
                     </div>
                 </div>
             </div>
-
+            <div class="tg-footerbar">
+                <div class="container">
+                    <span class="tg-copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
+                    <nav class="tg-footernav">
+                        <ul>
+                            <li><a href="#">Main</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Buy Tickets</a></li>
+                            <li><a href="#">Match Results</a></li>
+                            <li><a href="#">Upcoming Matches</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </footer>
         <!--************************************
                                                                             Footer End
