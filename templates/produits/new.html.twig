@@ -1,0 +1,11 @@
+{% extends 'admin_panel/index.html.twig' %}
+{% block title %}Ajouter produits
+{% endblock %}
+{% block body %}
+	<h1>Ajouter produits</h1>
+	{{form_start (form)}}
+	{{form_widget (form)}}
+	<input type="submit" value="create ajouter">
+
+	{{form_end (form)}}
+{% endblock %}

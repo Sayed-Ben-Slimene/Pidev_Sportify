@@ -1,0 +1,33 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block title %}liste des produits
+{% endblock %}
+
+{% block body  %}
+
+	<a class="tg-btn tg-btnaddtocart" href="{{path('add_produits')}}">Ajouter</a>
+	{% for p in produits %}
+
+
+		<div class="frame">
+			<h2>
+				<a href="#"><img src={{p.image}} alt="image description"></a>
+			</h2>
+		</div>
+
+
+		<h2>
+			<a href="#">{{p.title}}</a>
+		</h2>
+
+		<h3>{{p.prix}}</h3>
+
+
+		{{p.description}}
+		<div>
+			<a  href="{{ path('update_produit',{id: p.id})}}">modifier</a>
+			<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_produit',{id: p.id})}}">supprimer</a>
+		</div>
+	{% endfor %}
+
+{% endblock %}
