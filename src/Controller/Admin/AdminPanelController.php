@@ -9,11 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminPanelController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-
     public function index(): Response
     {
-        return $this->render('admin_panel/admin.html.twig');
+        return $this->render('admin_panel/PageHomeAdmin.html.twig');
     }
+
     #[Route('/loginAuth', name: 'Auth_login')]
     public function loginAuth(): Response
     {
@@ -29,7 +29,16 @@ class AdminPanelController extends AbstractController
     {
         return $this->render('admin_panel/Auth_forgot_pass.html.twig');
     }
-
+    #[Route('/userlist', name: 'userlist')]
+    public function userlist(): Response
+    {
+        return $this->render('admin_panel/UserList.html.twig');
+    }
+    #[Route('/organisateurList', name: 'Organisateurlist')]
+    public function Organisateurlist(): Response
+    {
+        return $this->render('admin_panel/OrganisateurList.html.twig');
+    }
 
 
 }
