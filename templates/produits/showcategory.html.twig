@@ -1,0 +1,15 @@
+Classroom: #{{ category.id }}
+{{ category.label}}
+<br>
+<h5>List Students</h5>
+{% for p in produits %}
+	{{ p.image }}
+	{{ p.title}}
+	{{ p.category.name }}
+	{{ p.prix }}
+
+	{{ p.description }}
+
+
+	<br>
+{% endfor %}

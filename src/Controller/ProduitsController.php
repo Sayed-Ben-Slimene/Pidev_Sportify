@@ -5,6 +5,7 @@ namespace App\Controller;
 use id;
 use App\Entity\Produits;
 use App\Form\ProduitsType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +48,7 @@ class ProduitsController extends AbstractController
         $form->handleRequest($request) ;
         if($form->isSubmitted()){
             $em= $doctrine->getManager();
+           
             $em->flush();
             return  $this->redirectToRoute("app_list");
         }
@@ -60,6 +62,15 @@ class ProduitsController extends AbstractController
         $em->remove($produit);
         $em->flush();
         return $this->redirectToRoute("app_list");
+    }
+    #[Route('/showCategory/{id}', name: 'showCategory')]
+    public function showCategory(ProduitsRepository $repo,$id,CategoryRepository $repository)
+    {
+        $category= $repository->find($id);
+        $produits= $repo->getStudentsByClassroom($id);
+        return $this->render("produits/showcategory.html.twig",
+        array("category"=>$category,
+            "produits"=>$produit));
     }
    
 }

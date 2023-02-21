@@ -1,7 +1,13 @@
 {% extends 'admin_panel/index.html.twig' %}
-{% block title %}<h3>modifier un produit</h3>
+{% block title %}modifier un produit
 {% endblock %}
 {% block body %}
-<h3>modifier un produit</h3>
-{{ form(produits) }}
+	<h3>modifier un produit</h3>
+	{{form_start (produits)}}
+	{{form_widget (produits)}}
+	<input type="submit" value=" enregistrer">
+
+	{{form_end (produits)}}
+
+
 {% endblock %}

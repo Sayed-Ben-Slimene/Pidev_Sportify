@@ -1,0 +1,40 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block title %}liste des  categories
+{% endblock %}
+
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h1>list des categories</h1>
+		<a href="{{ path('add_category')}}">Ajouter</a>
+	</div>
+
+	<div class="row">
+		{% for c in category %}
+			<div class="col-4 mt-4">
+
+
+				<div class="border border-dark rounded p-2 clearfix">
+					
+					
+					<h1>
+
+						{{ c.label }}
+						
+						
+					</h1>
+
+					
+
+				</div>
+				<a class="tg-btn tg-btnaddtocart" href="{{ path('update_category',{id: c.id})}}">modifier</a>
+				<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_category',{id: c.id})}}">supprimer</a>
+				
+
+			</div>
+
+
+		{% endfor %}
+	</div>
+{% endblock %}

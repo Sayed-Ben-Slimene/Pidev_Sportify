@@ -1,0 +1,11 @@
+{% extends 'admin_panel/index.html.twig' %}
+{% block title %}modifier
+{% endblock %}
+{% block body %}
+	<h3>Update Student</h3>
+	{{form_start (FormCategory)}}
+	{{form_widget (FormCategory)}}
+	<input type="submit" value=" enregistrer">
+
+	{{form_end (FormCategory)}}
+{% endblock %}

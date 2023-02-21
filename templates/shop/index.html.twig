@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+{% block title %}shop
+{% endblock %}
+{% block body %}
+	<main id="tg-main" class="tg-main tg-haslayout">
+		<div class="container">
+			<div class="row">
+				<div id="tg-twocolumns" class="tg-twocolumns tg-main-section tg-haslayout">
+					<div class="col-md-9 col-sm-8 col-xs-12 pull-right">
+						<div class="tg-shopbanner">
+							<div class="tg-bgpattran">
+								<div id="tg-shopslider" class="tg-shopslider">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="row">
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<div class="tg-shopcontent">
+														<span class="tg-limitedoffer">limited offer</span>
+														<div class="tg-contentbox">
+															<a class="tg-theme-tag" href="#">mens wear</a>
+															<h2>Yellow Sports shoes</h2>
+															<span class="tg-price">
+																<del>$ 256</del>
+																/ $200</span>
+															<span class="tg-stars">
+																<span></span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-5 hidden-sm hidden-xs">
+													<figure><img src="images/shop/img-01.png" alt="image description"></figure>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="row">
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<div class="tg-shopcontent">
+														<span class="tg-limitedoffer">limited offer</span>
+														<div class="tg-contentbox">
+															<a class="tg-theme-tag" href="#">mens wear</a>
+															<h2>Yellow Sports shoes</h2>
+															<span class="tg-price">
+																<del>$ 256</del>
+																/ $200</span>
+															<span class="tg-stars">
+																<span></span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-5 hidden-sm hidden-xs">
+													<figure><img src="images/shop/img-01.png" alt="image description"></figure>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="row">
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<div class="tg-shopcontent">
+														<span class="tg-limitedoffer">limited offer</span>
+														<div class="tg-contentbox">
+															<a class="tg-theme-tag" href="#">mens wear</a>
+															<h2>Yellow Sports shoes</h2>
+															<span class="tg-price">
+																<del>$ 256</del>
+																/ $200</span>
+															<span class="tg-stars">
+																<span></span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-5 hidden-sm hidden-xs">
+													<figure><img src="images/shop/img-01.png" alt="image description"></figure>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="row">
+												<div class="col-md-7 col-sm-12 col-xs-12">
+													<div class="tg-shopcontent">
+														<span class="tg-limitedoffer">limited offer</span>
+														<div class="tg-contentbox">
+															<a class="tg-theme-tag" href="#">mens wear</a>
+															<h2>Yellow Sports shoes</h2>
+															<span class="tg-price">
+																<del>$ 256</del>
+																/ $200</span>
+															<span class="tg-stars">
+																<span></span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-5 hidden-sm hidden-xs">
+													<figure><img src="images/shop/img-01.png" alt="image description"></figure>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tg-sliderpagination swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tg-shophead">
+							<ul class="tg-shopviewnav">
+								<li>
+									<a href="#">
+										<i class="fa fa-th"></i>
+									</a>
+								</li>
+								<li class="tg-active">
+									<a href="#">
+										<i class="fa fa-list"></i>
+									</a>
+								</li>
+							</ul>
+							<form class="tg-formfilter">
+								<fieldset>
+									<div class="tg-select">
+										<select>
+											<option>sort by: All Category</option>
+											<option>All Category</option>
+											<option>All Category</option>
+										</select>
+									</div>
+									<div class="tg-select">
+										<select>
+											<option>Show: 9 Items Per Page</option>
+											<option>All Category</option>
+											<option>All Category</option>
+										</select>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+						{% for p in products %}
+							<div class="th-products tg-shoplist">
+								<div class="tg-product">
+									<figure class="tg-productimg">
+										<a href="#"><img src="{{p.image}}" alt="image description"></a>
+									</figure>
+									<div class="tg-productinfo">
+										<a class="tg-theme-tag" href="#">Mens wear</a>
+										<div class="tg-producttitle">
+											<h2>
+												<a href="#">{{p.title}}</a>
+											</h2>
+										</div>
+										<div class="tg-producttitle">
+											<h2>
+												<a href="#">{{p.category.label}}</a>
+											</h2>
+										</div>
+										<div class="tg-productprice">
+											<h3>{{p.prix}}</h3>
+										</div>
+										<span class="tg-stars">
+											<span></span>
+										</span>
+										<div class="tg-description">
+											<p>{{p.description}}</p>
+										</div>
+										<div class="tg-productcolorsize">
+											<div class="tg-productsize">
+												<span>Size:</span>
+												<div class="tg-checkbox">
+													<input type="checkbox" name="size1" id="s1" checked>
+													<label class="tg-sizeone" for="s1">s</label>
+												</div>
+												<div class="tg-checkbox">
+													<input type="checkbox" name="size1" id="m1">
+													<label class="tg-sizetwo" for="m1">m</label>
+												</div>
+												<div class="tg-checkbox">
+													<input type="checkbox" name="size1" id="l1">
+													<label class="tg-sizethree" for="l1">l</label>
+												</div>
+												<div class="tg-checkbox">
+													<input type="checkbox" name="size1" id="xl1">
+													<label class="tg-sizefour" for="xl1">xl</label>
+												</div>
+												<div class="tg-checkbox">
+													<input type="checkbox" name="size1" id="xxl1">
+													<label class="tg-sizefive" for="xxl1">xxl</label>
+												</div>
+											</div>
+
+										</div>
+
+										<a class="tg-btn tg-btnaddtocart" href="#">add to cart</a>
+									</div>
+								</div>
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</main>
+		{% endblock %}

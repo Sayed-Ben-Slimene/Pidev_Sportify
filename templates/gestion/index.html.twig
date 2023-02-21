@@ -1,0 +1,23 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block title %}Gestion
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h1>list des categories</h1>
+
+	</div>
+	<div class="row">
+		<div class="border border-dark rounded p-2 clearfix">
+			<a class="tg-btn tg-btnaddtocart" href="{{ path('app_list')}}">produits</a>
+
+		</div>
+
+		<div class="border border-dark rounded p-2 clearfix">
+
+
+			<a class="tg-btn tg-btnaddtocart" href="{{ path('list_category')}}">categories</a>
+		</div>
+	</div>
+{% endblock %}

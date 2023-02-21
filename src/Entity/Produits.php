@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProduitsRepository;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +29,14 @@ class Produits
 
     #[ORM\Column]
     private ?float $prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    
+
+   
 
     public function getId(): ?int
     {
@@ -93,4 +102,18 @@ class Produits
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    
 }

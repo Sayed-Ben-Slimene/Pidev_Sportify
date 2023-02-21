@@ -3,31 +3,44 @@
 {% block title %}liste des produits
 {% endblock %}
 
-{% block body  %}
 
-	<a class="tg-btn tg-btnaddtocart" href="{{path('add_produits')}}">Ajouter</a>
-	{% for p in produits %}
+{% block body %}
+	<div class="bg-light p-3">
+		<h1>liste des produits</h1>
+		<a href="{{ path('add_produits')}}">Ajouter</a>
+	</div>
 
-
-		<div class="frame">
-			<h2>
-				<a href="#"><img src={{p.image}} alt="image description"></a>
-			</h2>
-		</div>
-
-
-		<h2>
-			<a href="#">{{p.title}}</a>
-		</h2>
-
-		<h3>{{p.prix}}</h3>
+	<div class="row">
+		{% for p in produits %}
+			<div class="col-4 mt-4">
 
 
-		{{p.description}}
-		<div>
-			<a  href="{{ path('update_produit',{id: p.id})}}">modifier</a>
-			<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_produit',{id: p.id})}}">supprimer</a>
-		</div>
-	{% endfor %}
+				<div class="border border-dark rounded p-2 clearfix">
+					<img class="img-fluid rounded" src={{p.image}} alt="image description">
+					<hr>
+					<h1>
 
+
+						{{ p.title }}
+					</h1>
+
+					{{ p.category.label }}
+
+					-
+					{{ p.prix }}
+
+					<h4>
+						{{p.description }}
+					</h4>
+
+
+				</div>
+				<a class="tg-btn tg-btnaddtocart" href="{{ path('update_produit',{id: p.id})}}">modifier</a>
+				<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_produit',{id: p.id})}}">supprimer</a>
+
+			</div>
+
+
+		{% endfor %}
+	</div>
 {% endblock %}
