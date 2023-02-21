@@ -34,11 +34,7 @@ class AdminPanelController extends AbstractController
     {
         return $this->render('admin_panel/UserList.html.twig');
     }
-    #[Route('/organisateurList', name: 'Organisateurlist')]
-    public function Organisateurlist(): Response
-    {
-        return $this->render('admin_panel/OrganisateurList.html.twig');
-    }
+
 
 
 }

@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+
+    /**              Fans    Start                         */
+    #[Route('/fans', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/indexuser.html.twig', [
@@ -21,6 +23,16 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**              Organisateur    Start                         */
+
+    #[Route('/organisateur', name: 'Organisateurlist',  methods: ['GET'])]
+    public function Organisateurlist(UserRepository $userRepository): Response
+    {
+        return $this->render('admin_panel/OrganisateurList.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+    /**              Organisateur    End                         */
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
@@ -75,4 +87,8 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**              Fans    End                         */
+
+
+
 }
