@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block css %}
-
         <link rel="preconnect" href="{{asset('https://fonts.googleapis.com')}}">
-
         <link rel="preconnect" href="{{asset('https://fonts.gstatic.com')}}" crossorigin>
-
         <link href="{{asset('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap')}}" rel="stylesheet">
         <link rel="apple-touch-icon" href="{{asset('asset/apple-touch-icon.png')}}">
         <link rel="stylesheet" href="{{asset('asset/css/bootstrap.min.css')}}">
@@ -38,7 +35,7 @@
 
     <!--[if lt IE 8]> <p class="browserupgrade"> are using an <strong>>
         browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a>
+        <a href="https://browsehappy.com/">upgrade your browser</a>
         to improve your experience.</p>
     <![endif]-->
     <!--*            Wrapper Start*************************************-->
@@ -259,7 +256,7 @@
                                                                     *************************************-->
         <div class="tg-sliderbox">
             <div class="tg-imglayer">
-                <img src="asset/images/bg-pattran.png" alt="image desctription">
+                <img src="{{asset('asset/images/bg-pattran.png')}}" alt="image desctription">
             </div>
             <div id="tg-home-slider" class="tg-home-slider tg-haslayout">
                 <div class="swiper-wrapper">
@@ -272,7 +269,6 @@
                                 <h1>La Reference
                                     <span>De Football</span>
                                 </h1>
-
                             </div>
                         </div>
                     </div>
@@ -583,15 +579,8 @@
         </div>
     </div>
 
-
-
-
-
-
-
     {% block js %}
         <script src="{{asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
-
         <script src="{{asset('asset/js/vendor/jquery-library.js')}}"></script>
         <script src="{{asset('asset/js/vendor/bootstrap.min.js')}}"></script>
         <script src="{{asset('asset/js/customScrollbar.min.js')}}"></script>

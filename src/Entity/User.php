@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -39,7 +40,7 @@ class User
     #[Assert\NotBlank(message: "vous devez mettre votre mot de passe!!!")]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::OBJECT)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "vous devez mettre votre role(Admin ou Organisateur)!!!")]
     private ?string $role = null;
 
@@ -131,4 +132,5 @@ class User
 
         return $this;
     }
+
 }
