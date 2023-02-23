@@ -12,31 +12,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class ProduitsController extends AbstractController
 {
+    
     #[Route('/add_produits', name: 'add_produits')]
-    public function new(Request $request,ProduitsRepository $repository ,ManagerRegistry $doctrine)
+    public function add(ProduitsRepository $repository,Request  $request,ManagerRegistry $doctrine)
     {
-        $produit=new Produits();
-        $form =$this->createForm(ProduitsType::class,$produit);
-        $form ->handleRequest($request);
-        if($form->isSubmitted()  ){
-           $em =$this->getDoctrine()->getManager();
-           $em->persist($produit);
-           $em->flush();
-            return $this->redirectToRoute( route: 'app_list');
-        }
-        return $this->render('produits/new.html.twig',[
-            "form"=>$form->createView()
-        ] );
+        $produit= new  Produits();
+        $form= $this->createForm(ProduitsType::class,$produit);
+        $form->handleRequest($request) ;
+        if($form->isSubmitted() && $form->isValid()){
+             $repository->save($produit,true);
+             return  $this->redirectToRoute("list_produits");
+         }
+        return $this->renderForm("produits/new.html.twig",["form"=>$form]);
     }
-    #[Route('/list', name: 'app_list')]
+    #[Route('/list', name: 'list_produits')]
     public function list(ProduitsRepository $repository)
     {
         return $this->render('produits/list.html.twig', [
-            'produits' => $repository->findBy(["published"=>1])
+            'produits' => $repository->findAll()
         ]);
     }
     
@@ -46,13 +44,13 @@ class ProduitsController extends AbstractController
         $produit= $repository->find($id);
         $form= $this->createForm(ProduitsType::class,$produit);
         $form->handleRequest($request) ;
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
+
             $em= $doctrine->getManager();
-           
             $em->flush();
-            return  $this->redirectToRoute("app_list");
+            return  $this->redirectToRoute("list_produits");
         }
-        return $this->renderForm("produits/update.html.twig",array("produits"=>$form));
+        return $this->renderForm("produits/update.html.twig",["form"=>$form]);
     }
     #[Route('produits/remove/{id}', name: 'remove_produit')]
     public function remove(ManagerRegistry $doctrine,$id,ProduitsRepository $repository)
@@ -61,7 +59,7 @@ class ProduitsController extends AbstractController
         $em= $doctrine->getManager();
         $em->remove($produit);
         $em->flush();
-        return $this->redirectToRoute("app_list");
+        return $this->redirectToRoute("list_produits");
     }
     #[Route('/showCategory/{id}', name: 'showCategory')]
     public function showCategory(ProduitsRepository $repo,$id,CategoryRepository $repository)

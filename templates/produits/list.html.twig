@@ -7,9 +7,9 @@
 {% block body %}
 	<div class="bg-light p-3">
 		<h1>liste des produits</h1>
-		<a href="{{ path('add_produits')}}">Ajouter</a>
-	</div>
+		<a type="button" class="btn btn-warning" href="{{ path('add_produits')}}">Ajouter</a>
 
+	</div>
 	<div class="row">
 		{% for p in produits %}
 			<div class="col-4 mt-4">
@@ -43,4 +43,5 @@
 
 		{% endfor %}
 	</div>
+
 {% endblock %}

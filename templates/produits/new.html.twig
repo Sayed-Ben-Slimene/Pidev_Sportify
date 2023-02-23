@@ -2,10 +2,11 @@
 {% block title %}Ajouter produits
 {% endblock %}
 {% block body %}
-	<h1>Ajouter produits</h1>
-	{{form_start (form)}}
-	{{form_widget (form)}}
-	<input type="submit" value=" ajouter">
+	<div class="bg-light p-3">
+		<h1>Ajouter produits</h1>
+	</div>
+	{{ include('produits/_form.html.twig') }}
+	<br>
 
-	{{form_end (form)}}
+	<a href="{{ path('list_produits') }}">back to list</a>
 {% endblock %}

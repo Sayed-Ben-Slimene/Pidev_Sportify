@@ -3,11 +3,12 @@
 {% endblock %}
 {% block body %}
 	<div class="bg-light p-3">
-		<h1>Ajouter produits</h1>
+		<h1>Ajouter categorie</h1>
 		<a href="{{ path('add_category')}}">Ajouter</a>
 	</div>
+	<a href="{{ path('add_category')}}">Ajouter</a>
 
-	<div class="row">
+	<div class="container">
 		{{form_start (form1)}}
 		{{form_widget (form1)}}
 		<input type="submit" value=" ajouter">

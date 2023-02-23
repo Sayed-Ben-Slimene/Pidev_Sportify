@@ -6,6 +6,9 @@ use App\Repository\ProduitsRepository;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Assert\NotBlank;
+
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 class Produits
@@ -16,18 +19,24 @@ class Produits
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "vous devez mettre le title !!!")]
+    
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[NotBlank(message: "vous devez mettre le description !!!")]
     private ?string $description = null;
 
     #[ORM\Column]
+   
     private ?bool $published = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "vous devez mettre l'image !!!")]
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "vous devez mettre le prix !!!")]
     private ?float $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]

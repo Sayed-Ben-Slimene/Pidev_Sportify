@@ -2,12 +2,13 @@
 {% block title %}modifier un produit
 {% endblock %}
 {% block body %}
-	<h3>modifier un produit</h3>
-	{{form_start (produits)}}
-	{{form_widget (produits)}}
-	<input type="submit" value=" enregistrer">
+	<div class="bg-light p-3">
+		<h1>Modifier le produit</h1>
+	</div>
+	{{ include('produits/_form.html.twig') }}
+	<br>
 
-	{{form_end (produits)}}
+	<a href="{{ path('list_produits') }}">back to list</a>
 
 
 {% endblock %}

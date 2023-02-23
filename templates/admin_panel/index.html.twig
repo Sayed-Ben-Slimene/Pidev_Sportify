@@ -354,11 +354,16 @@
 								</a>
 							</li>
 							<li>
-								<a href="{{path('app_gestion')}}">
-									<i class="fa fa-calendar-check-o"></i>
+								<a href="javascript:void(0)" class="has-arrow arrow-c">
+									<i class="fa fa-lock"></i>
 									<span>Shop</span>
 								</a>
+								<ul>
+									<li><a href="{{path('list_produits')}}">Produits</a></li>
+									<li><a href="{{path('list_category')}}">Catégories</a></li>
+								</ul>
 							</li>
+							
 							<li>
 								<a href="project-ticket.html">
 									<i class="fa fa-list-ul"></i>
@@ -613,7 +618,7 @@
 					</div>
 				{% endblock %}
 			</div>
-			
+
 		</div>
 
 
