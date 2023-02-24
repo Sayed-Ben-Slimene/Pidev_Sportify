@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+    <h1>Create new Reservation</h1>
+
+    {{ include('reservation/_form.html.twig') }}
+    <a href="{{ path('app_reservation_index') }}">back to list</a>
+    {% if app.request.get('msg') is defined %}
+    {% set msg = app.request.get('msg') %}
+        <h4 style='color:black'> Il reste seulement {{msg}} places</h4>
+    {% endif %}
+{% endblock %}

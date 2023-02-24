@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}evenement
+{% endblock %}
+
+{% block body %}
+	<section class="tg-main-section tg-haslayout">
+		<div class="container">
+			<div class="tg-section-name">
+				<h2>Latest Events / news</h2>
+			</div>
+			<div class="col-sm-11 col-xs-11 pull-right">
+				<div class="row">
+					<div class="tg-blogpost">
+						
+							<div class="row">
+								<div class="col-sm-6 col-xs-8">
+									<article class="tg-post">
+										<figure class="tg-postimg">
+											<a href="{{ path('blogCommentaire', {'id': event.id}) }}">
+												<img style="width:600;height:400px;" src="{{ asset('uploads/' ~ event.img) }}" alt="image description">
+											</a>
+											<figcaption>
+												<ul class="tg-postmetadata">
+													<li>
+														<a href="#">
+															{{ event.dateEvenement | date("d") }}
+														</a>
+													</li>
+													<li>
+														<a href="#">
+															{{ event.dateEvenement | date("m") }}
+														</a>
+													</li>
+													<li>
+														<a href="#">{{ event.dateEvenement | date("Y") }}</a>
+													</li>
+												</ul>
+											</figcaption>
+										</figure>
+										<div class="tg-posttitle">
+											<h3>
+												<a href="#">{{event.nomEvenement}}</a>
+											</h3>
+										</div>
+										<div class="tg-description">
+											
+											<p>Cet evenement sera à {{event.lieuEvenement}}.</p>
+											<p>Avec une Capacité de {{event.capacite}}.</p><br>
+											<p>{{event.description}}.</p>
+										</div>
+
+
+									</article>
+								</div>
+
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		{% for res in ListeReservation %}
+
+
+			<div class="tg-section-heading">
+				<h3>
+					<img style="width:40px;height:40px; border-radius:100" src="{{asset('asset/images/avatar.jpg')}}" alt="image description">
+					{{res.user}}</h3>
+			</div>
+
+			<div class="tg-description">
+				<p> Les Place reservé sont: {{ res.nbPlace }}.</p>				
+			
+			
+		</div><br><br>
+	{% endfor %}
+    <a href="{{ path('app_reservation_new') }}">Ajouter une reservation </a>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}actualité {% endblock %}
+
+{% block body %}
+<section class="tg-main-section tg-haslayout">
+            <div class="container">
+                <div class="tg-section-name">
+                    <h2>Latest blog / news</h2>
+                </div>
+                <div class="col-sm-11 col-xs-11 pull-right">
+                    <div class="row">
+                        <div class="tg-blogpost">
+                        {% for ac in actualites %}
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-8">
+                                    <article class="tg-post">
+                                        <figure class="tg-postimg">
+                                            <a href="{{ path('blogCommentaire', {'id': ac.id}) }}">
+                                                <img style="width:600;height:400px;" src="{{ asset('uploads/' ~ ac.img) }}" alt="image description">
+                                            </a>
+                                            <figcaption>
+                                                <ul class="tg-postmetadata">
+                                                    <li>
+                                                        <a href="#"> {{ ac.date | date("d") }}
+</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"> {{ ac.date | date("m") }} </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">{{ ac.date | date("Y") }}</a>
+                                                    </li>
+                                                </ul>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="tg-posttitle">
+                                            <h3>
+                                                <a href="#">{{ac.titre}}</a>
+                                            </h3>
+                                        </div>
+                                        <div class="tg-description">
+                                            <p>{{ac.description}}.</p>
+                                        </div>
+                                        <a class="tg-btn" href="{{ path('blogCommentaire', {'id': ac.id}) }}">readmore</a>
+
+                               
+
+                                    </article>
+                                </div>
+                                
+                            </div>
+                            {% endfor%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
