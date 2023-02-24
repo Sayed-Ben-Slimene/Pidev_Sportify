@@ -1,50 +1,38 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\Register;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RegistrationController extends AbstractController
 {
-    private UserPasswordEncoderInterface $passwordEncoder;
-
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
-
-    /**
-     * @Route("/registration", name="registration")
-     */
-    public function index(Request $request): \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+    #[Route('/registerUser', name: 'app_registration', methods: ['GET', 'POST'])]
+    public function new(Request $request, UserRepository $userRepository , SluggerInterface $slugger): Response
     {
         $user = new User();
-
-        $form = $this->createForm(UserType::class, $user);
-
+        $form = $this->createForm(Register::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encode the new users password
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
 
-            // Set their role
             $user->setRoles(['ROLE_USER']);
-
-            // Save
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('app_login');
+            $userRepository->save($user, true);
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('registration/register.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('registration/register.html.twig', [
+            'user' => $user,
+            'form' => $form,
         ]);
     }
+
+
+
 }

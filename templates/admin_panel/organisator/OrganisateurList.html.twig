@@ -143,15 +143,15 @@
                                         <h6 class="mt-3 mb-0">{{ user.prenom }} {{ user.nom }}</h6>
                                         <span>{{ user.email }}</span>
                                         <ul class="mt-3 list-unstyled d-flex justify-content-center">
-                                            <button class="btn btn-outline-success">Modifier</button>
-                                            <button class="btn btn-outline-danger">  Voir Profil   </button>
+                                            <button class="btn btn-outline-success" onclick="window.location.href ='{{ path('app_organisator_edit', {'id': user.id}) }}';">Modifier</button>
+                                            <button class="btn btn-outline-danger" onclick="window.location.href ='{{ path('app_organisator_show', {'id': user.id}) }}';">  Voir Profil   </button>
                                         </ul>
                                         <div class="row text-center mt-4">
                                             <div class="col-6 border-right">
                                                 <label class="mb-0">{{ user.tel }}</label>
                                             </div>
                                             <div class="col-6">
-                                                <label class="mb-0">{{ user.password }}</label>
+                                                <label class="mb-0">***********</label>
                                             </div>
                                         </div>
                                     </div>

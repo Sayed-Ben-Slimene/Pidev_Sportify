@@ -11,11 +11,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface; // @dth: to encode the pass
+
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private $passwordEncoder;
 
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     /**              Fans    Start                         */
     #[Route('/fans', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -27,13 +34,7 @@ class UserController extends AbstractController
 
     /**              Organisateur    Start                         */
 
-    #[Route('/organisateur', name: 'Organisateurlist',  methods: ['GET'])]
-    public function Organisateurlist(UserRepository $userRepository): Response
-    {
-        return $this->render('admin_panel/OrganisateurList.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
+
     /**              Organisateur    End                         */
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository , SluggerInterface $slugger): Response
@@ -41,12 +42,11 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles(['ROLE_USER']);
-
+            $plainpwd = $user->getPassword();
+            $encoded = $this->passwordEncoder->encodePassword($user, $plainpwd);
+            $user->setPassword($encoded);
             $photo = $form->get('photo')->getData();
-
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
             if ($photo) {
@@ -70,16 +70,13 @@ class UserController extends AbstractController
                 $user->setImage($newFilename);
             }
                 $userRepository->save($user, true);
-
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
-
 
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
@@ -100,7 +97,11 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setRoles(['ROLE_USER']);
+            $plainpwd = $user->getPassword();
+            $encoded = $this->passwordEncoder->encodePassword($user, $plainpwd);
+            $user->setPassword($encoded);
+
+
 
             $photo = $form->get('photo')->getData();
 

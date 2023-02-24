@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Form;
-
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -22,7 +21,6 @@ class Register extends AbstractType
             ->add('tel')
             ->add('adress')
             ->add('email')
-            ->add('password')
             ->add('password',RepeatedType::class, [
                 'type'=>PasswordType::class,
                 'first_options'=>['label'=>'Password'],

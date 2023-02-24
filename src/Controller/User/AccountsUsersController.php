@@ -17,7 +17,7 @@ class AccountsUsersController extends AbstractController
         ]);
     }
 
-    #[Route('/regissssster', name: 'app_registsssser')]
+    #[Route('/register', name: 'app_register')]
     public function registerUser(): Response
     {
         return $this->render('AccountsUsers/register.html.twig');

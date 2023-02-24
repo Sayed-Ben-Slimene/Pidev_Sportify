@@ -1,103 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    {% block title %}
+        <title>Login</title>
+    {% endblock %}
 
-
-{% block header %}
-
-{% endblock %}
-
-{% block sidebar %}
-
-{% endblock %}
-
-{% block footer %}
-
-{% endblock %}
+    {% block css %}
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="{{ asset('AccountUser/stylelogin.css') }}">
+    {% endblock %}
+</head>
 {% block body %}
-
+<body>
+<div class="section">
     <div class="container">
-
-        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-                        <div class="d-flex justify-content-center py-4">
-                            <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                <img src="assets/img/logo.png" alt="">
-                                <span class="d-none d-lg-block">NiceAdmin</span>
-                            </a>
-                        </div><!-- End Logo -->
-
-                        <div class="card mb-3">
-
-                            <div class="card-body">
-
-                                <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                                    <p class="text-center small">Enter your personal details to create account</p>
-                                </div>
-
-
-                                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
-                                <div class="col-12">
-                                    <label for="yourName" class="form-label">Your Name</label>
-
-                                    <div class="invalid-feedback">Please, enter your name!</div>
-                                    {{ form_widget(form.name,{'attr':{'class':'form-control'}}) }}
-
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="yourEmail" class="form-label">Your Email</label>
-                                    {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
-                                    <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                                </div>
-
-
-
-                                <div class="col-12">
-                                    <label for="yourPassword" class="form-label">Password</label>
-                                    {{ form_widget(form.password.first,{'attr':{'class':'form-control'}}) }}
-                                    <div class="invalid-feedback">Please enter your password!</div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="yourPassword" class="form-label">Confirm Password</label>
-                                    {{ form_widget(form.password.second,{'attr':{'class':'form-control'}}) }}
-                                    <div class="invalid-feedback">Please confirm your password!</div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required="">
-                                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                                        <div class="invalid-feedback">You must agree before submitting.</div>
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto" >
+                        <div class="card-3d-wrapper" >
+                            <div class="card-front" style="height:250% ;">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                                        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                                        <form>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.nom,{'attr':{'class':'form-style','placeholder':'nom'}}) }}
+                                                {% if form_errors(form.nom) is not empty %}
+                                                    <div class="alert text-warning" >
+                                                        {{ form_errors(form.nom) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.prenom,{'attr':{'class':'form-style','placeholder':'prenom'}}) }}
+                                                {% if form_errors(form.prenom) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.prenom) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.adress,{'attr':{'class':'form-style','placeholder':'adresse'}}) }}
+                                                {% if form_errors(form.adress) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.adress) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil-location-point"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.tel,{'attr':{'class':'form-style','placeholder':'téléphone'}}) }}
+                                                {% if form_errors(form.tel) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.tel) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil-calling"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.email,{'attr':{'class':'form-style','placeholder':'email'}}) }}
+                                                {% if form_errors(form.email) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.email) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.password.first,{'attr':{'class':'form-style','placeholder':'password'}}) }}
+                                                {% if form_errors(form.password.first) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.password.first) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.password.second,{'attr':{'class':'form-style','placeholder':'password'}}) }}
+                                                {% if form_errors(form.password.second) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.password.second) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <button class="btn mt-4">{{ button_label|default('Enregistrer') }}</button>
+                                            <p class="mb-0 mt-4 text-center"><a href="{{ path('homepage') }}" class="link">Retour à l'accueil</a></p>
+                                        </form>
+                                        {{ form_end(form) }}
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                                </div>
-                                <div class="col-12">
-                                    <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
-                                </div>
-                                {{ form_end(form) }}
-
                             </div>
                         </div>
-
-                        <div class="credits">
-                            <!-- All the links in the footer should remain intact. -->
-                            <!-- You can delete the links only if you purchased the pro version. -->
-                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
-
                     </div>
-                </div>
             </div>
-
-        </section>
-
+        </div>
     </div>
+</div>
+</body>
 
 {% endblock %}

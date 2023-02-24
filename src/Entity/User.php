@@ -18,27 +18,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "vous devez mettre votre nom!!!")]
+    #[Assert\NotBlank(message: "vous devez mettre votre nom !")]
+    #[Assert\Length( min: 3, minMessage: 'Le nom doit avoir au minimum 3 caracteres !',)]
     private ?string $nom = null;
 
+
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "vous devez mettre votre prenom!!!")]
+    #[Assert\NotBlank(message: "vous devez mettre votre prenom !")]
+    #[Assert\Length( min: 3, minMessage: 'Le prenom doit avoir au minimum 3 caracteres !',)]
     private ?string $prenom = null;
 
+
     #[ORM\Column]
-    #[Assert\NotBlank(message: "vous devez mettre votre telephone!!!")]
+    #[Assert\NotBlank(message: "vous devez mettre votre telephone !")]
+    #[Assert\Range(
+        notInRangeMessage: 'Le numéro de telephone doit etre de 8 chiffres !',
+        min: 10000000,
+        max: 99999999,
+
+    )]
     private ?int $tel = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "vous devez mettre votre adresse!!!")]
+    #[Assert\NotBlank(message: "vous devez mettre votre adresse !")]
+    #[Assert\Length( min: 3, minMessage: 'Adress doit avoir au minimum 3 caracteres !',)]
+
     private ?string $adress = null;
 
     #[ORM\Column(length: 150 , unique: true)]
-    #[Assert\NotBlank(message: 'The email {{ value }} is not a valid email.',)]
+    #[Assert\Email(message: "L'Email {{ value }} n'est pas un Email valide !")]
+    #[Assert\NotBlank(message: "vous devez mettre votre Email !")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "vous devez mettre votre mot de passe!!!")]
+    #[Assert\Length( min: 8, minMessage: 'Mode de passe doit avoir au minimum 8 caracteres !',)]
     private ?string $password = null;
 
     #[ORM\Column(type: 'json')]
@@ -123,7 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -163,14 +177,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials()
     {
-        return null;
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
 
-    public function getUsername()
+    public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
+        return (string) $this->email;
     }
 }
