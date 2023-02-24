@@ -2,10 +2,29 @@
 {% block title %}modifier
 {% endblock %}
 {% block body %}
-	<h3>Update Student</h3>
-	{{form_start (FormCategory)}}
-	{{form_widget (FormCategory)}}
-	<input type="submit" value=" enregistrer">
+	<div class="bg-light p-3">
+		<h1>Modifier categorie</h1>
 
-	{{form_end (FormCategory)}}
+	</div>
+	<div class="container">
+		{{form_start (FormCategory ,{'attr':{'novalidate':'novalidate'}})}}
+
+		<div class="form-group">
+			{{ form_label(FormCategory.label,"label") }}
+			{{ form_widget(FormCategory,{ 'attr': {'class': 'form-control'} }) }}
+			{% if form_errors(FormCategory) is not empty %}
+				<div class="alert alert-danger">
+					{{ form_errors(FormCategory.label) }}
+				</div>
+			{% endif %}
+		</div>
+
+		<div class="col-sm-12 text-right m-t-20">
+
+			<input type="submit" class="btn btn-warning " value=" ajouter">
+		</div>
+
+		{{form_end (FormCategory)}}
+	</div>
+
 {% endblock %}

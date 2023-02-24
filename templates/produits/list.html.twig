@@ -6,37 +6,50 @@
 
 {% block body %}
 	<div class="bg-light p-3">
-		<h1>liste des produits</h1>
+		<h1>LISTE DES PRODUITS</h1>
 		<a type="button" class="btn btn-warning" href="{{ path('add_produits')}}">Ajouter</a>
 
 	</div>
-	<div class="row">
+	<div class="container">
 		{% for p in produits %}
+
 			<div class="col-4 mt-4">
 
 
 				<div class="border border-dark rounded p-2 clearfix">
-					<img class="img-fluid rounded" src={{p.image}} alt="image description">
+					<figure>
+						<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/'~p.photo)}}">
+					</figure>
+
+
 					<hr>
+
+
 					<h1>
 
 
 						{{ p.title }}
 					</h1>
-
-					{{ p.category.label }}
-
-					-
-					{{ p.prix }}
-
 					<h4>
-						{{p.description }}
+
+						{{ p.category.label }}
+
+						-
+					</h4>
+					<h4>
+
+						{{ p.prix }} TND
+
 					</h4>
 
 
+					{{p.description }}
+					
+
 				</div>
-				<a class="tg-btn tg-btnaddtocart" href="{{ path('update_produit',{id: p.id})}}">modifier</a>
-				<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_produit',{id: p.id})}}">supprimer</a>
+				<br>
+				<a type="button" class="btn btn-warning" href="{{ path('update_produit',{id: p.id})}}">modifier</a>
+				<a type="button" class="btn btn-warning" href="{{ path('remove_produit',{id: p.id})}}">supprimer</a>
 
 			</div>
 

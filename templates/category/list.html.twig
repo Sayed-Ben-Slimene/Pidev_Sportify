@@ -6,8 +6,9 @@
 
 {% block body %}
 	<div class="bg-light p-3">
-		<h1>list des categories</h1>
-		<a href="{{ path('add_category')}}">Ajouter</a>
+		<h1>List des catégories</h1>
+		<a type="button" class="btn btn-warning" href="{{ path('add_category')}}">Ajouter</a>
+
 	</div>
 
 	<div class="row">
@@ -16,21 +17,21 @@
 
 
 				<div class="border border-dark rounded p-2 clearfix">
-					
-					
+
+
 					<h1>
 
 						{{ c.label }}
-						
-						
+
+
 					</h1>
 
-					
 
 				</div>
-				<a class="tg-btn tg-btnaddtocart" href="{{ path('update_category',{id: c.id})}}">modifier</a>
-				<a class="tg-btn tg-btnaddtocart" href="{{ path('remove_category',{id: c.id})}}">supprimer</a>
-				
+				<a type="button" class="btn btn-warning" href="{{ path('update_category',{id: c.id})}}">modifier
+				</a>
+				<a type="button" class="btn btn-warning" href="{{ path('remove_category',{id: c.id})}}">supprimer</a>
+
 
 			</div>
 

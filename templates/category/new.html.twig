@@ -4,14 +4,27 @@
 {% block body %}
 	<div class="bg-light p-3">
 		<h1>Ajouter categorie</h1>
-		<a href="{{ path('add_category')}}">Ajouter</a>
+
 	</div>
-	<a href="{{ path('add_category')}}">Ajouter</a>
+
 
 	<div class="container">
-		{{form_start (form1)}}
-		{{form_widget (form1)}}
-		<input type="submit" value=" ajouter">
+		{{form_start (form1 ,{'attr':{'novalidate':'novalidate'}})}}
+
+		<div class="form-group">
+			{{ form_label(form1.label,"label") }}
+			{{ form_widget(form1.label,{ 'attr': {'class': 'form-control'} }) }}
+			{% if form_errors(form1.label) is not empty %}
+				<div class="alert alert-danger">
+					{{ form_errors(form1.label) }}
+				</div>
+			{% endif %}
+		</div>
+		
+		<div class="col-sm-12 text-right m-t-20">
+
+			<input type="submit" class="btn btn-warning " value=" ajouter">
+		</div>
 
 		{{form_end (form1)}}
 	</div>

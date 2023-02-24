@@ -19,11 +19,13 @@ class Produits
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length( min: 3, minMessage: 'title doit avoir au minimum 3 caracteres',)]
     #[Assert\NotBlank(message: "vous devez mettre le title !!!")]
     
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length( min: 10, max: 1000, minMessage: 'Vous devez decrire plus de details ',)]
     #[NotBlank(message: "vous devez mettre le description !!!")]
     private ?string $description = null;
 
@@ -31,17 +33,20 @@ class Produits
    
     private ?bool $published = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "vous devez mettre l'image !!!")]
-    private ?string $image = null;
+    
 
-    #[ORM\Column]
+    #[ORM\Column (type: Types::DECIMAL, precision: 10, scale: '0')]
+    #[Assert\Positive(message:" donner un prix réel en dinar")]
     #[Assert\NotBlank(message: "vous devez mettre le prix !!!")]
     private ?float $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column(length: 255)]
+    
+    private ?string $photo = null;
 
     
 
@@ -88,17 +93,7 @@ class Produits
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
+   
 
     public function getPrix(): ?float
     {
@@ -120,6 +115,18 @@ class Produits
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
