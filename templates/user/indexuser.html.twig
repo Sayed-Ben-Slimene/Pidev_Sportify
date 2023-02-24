@@ -104,7 +104,6 @@
                                 <div class="d-md-flex justify-content-between">
                                     <ul class="nav nav-tabs b-none">
                                         <li class="nav-item"><a class="nav-link active" id="list-tab" data-toggle="tab" href="#list"><i class="fa fa-list-ul"></i> List des fans</a></li>
-
                                     </ul>
                                 </div>
                             </div>
@@ -127,31 +126,25 @@
                                                 <td class="width35 hidden-xs">
                                                     <a href="javascript:void(0);" class="mail-star"><i class="fa fa-star"></i></a>
                                                 </td>
-                                                <td>
-                                                    <div class="text-muted">{{ user.id }}</div>
-                                                </td>
                                                 <td class="text-center width40">
                                                     <div class="avatar d-block">
-                                                        <img class="avatar" src="{{ asset('AdminPanel/asset/images/sm/avatar3.jpg') }}" alt="avatar">
+                                                        <img class="avatar"  width="160" src="{{asset('uploads/users/'~user.image)}}"  alt="Profile Photo">
                                                     </div>
                                                 </td>
-
-                                                <td>
+                                                <td class="hidden-sm">
                                                     <div><a href="javascript:void(0);">{{ user.prenom }} {{ user.nom }}</a></div>
-                                                    <div class="text-muted">{{ user.tel }}</div>
+                                                    <div class="text-muted"> +216 {{ user.tel }}</div>
                                                 </td>
                                                 <td class="hidden-xs">
-                                                    <div class="text-muted">{{ user.email }}</div>
+                                                    <div class="text-muted"> {{ user.email }}</div>
+                                                    <div class="text-muted">{{ user.password }}</div>
                                                 </td>
                                                 <td class="hidden-sm">
                                                     <div class="text-muted">{{ user.adress }}</div>
-                                                </td>
-                                                <td class="hidden-sm">
-                                                    <div class="text-muted">{{ user.password }}</div>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-outline-success"  onclick="window.location.href ='{{ path('app_user_edit', {'id': user.id}) }}';">Edit</button>
 
+                                                </td>
+                                                <td class="text-right">
+                                                    <button type="button" class="btn btn-outline-success"  onclick="window.location.href ='{{ path('app_user_edit', {'id': user.id}) }}';">Edit</button>
                                                     <button type="button" class="btn btn-outline-danger" onclick="window.location.href ='{{ path('app_user_show', {'id': user.id}) }}';">Show</button>
                                                 </td>
                                             </tr>
@@ -197,6 +190,10 @@
             });
         </script>
     </div>
+        </div>
+    </div>
+
+
 
 <!-- <a href="{{ path('app_user_new') }}">Créer un nouveau</a>-->
 

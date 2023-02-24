@@ -3,6 +3,8 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
+
+
     <h1>User</h1>
 
     <table class="table">
@@ -35,10 +37,7 @@
                 <th>Password</th>
                 <td>{{ user.password }}</td>
             </tr>
-            <tr>
-                <th>Role</th>
-                <td>{{ user.role }}</td>
-            </tr>
+
         </tbody>
     </table>
 
@@ -47,4 +46,6 @@
     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
+
+
 {% endblock %}

@@ -1362,14 +1362,14 @@ address { font-style: italic; }
 	position:absolute;
 }
 .tg-logo{
-	width:180px;
-	height:180px;
+	width:150px;
+	height:150px;
 	margin:0 auto;
 	display:block;
 }
 .tg-logo a{ display:block;}
 .tg-logo a img{
-	width:160%;
+	width:100%;
 	height:auto;
 	display:block;
 }

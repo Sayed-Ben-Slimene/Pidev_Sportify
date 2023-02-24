@@ -5,11 +5,12 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,7 +33,7 @@ class User
     #[Assert\NotBlank(message: "vous devez mettre votre adresse!!!")]
     private ?string $adress = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150 , unique: true)]
     #[Assert\NotBlank(message: 'The email {{ value }} is not a valid email.',)]
     private ?string $email = null;
 
@@ -40,9 +41,22 @@ class User
     #[Assert\NotBlank(message: "vous devez mettre votre mot de passe!!!")]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "vous devez mettre votre role(Admin ou Organisateur)!!!")]
-    private ?string $role = null;
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image  ="default.png";
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -121,16 +135,42 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getUserIdentifier(): string
     {
-        return $this->role;
+        return (string) $this->email;
     }
 
-    public function setRole(string $role): self
+    public function getRoles(): array
     {
-        $this->role = $role;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
 }
