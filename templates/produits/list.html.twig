@@ -13,12 +13,13 @@
 	<div class="container">
 		{% for p in produits %}
 
+
 			<div class="col-4 mt-4">
 
 
 				<div class="border border-dark rounded p-2 clearfix">
 					<figure>
-						<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/'~p.photo)}}">
+						<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/miniature/'~p.photo )}}"/>
 					</figure>
 
 
@@ -38,13 +39,14 @@
 					</h4>
 					<h4>
 
-						{{ p.prix }} TND
+						{{ p.prix }}
+						
 
 					</h4>
 
 
 					{{p.description }}
-					
+
 
 				</div>
 				<br>

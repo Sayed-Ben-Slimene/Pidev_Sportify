@@ -29,6 +29,7 @@ class ProduitsType extends AbstractType
             ->add("description",TextareaType::class)
             ->add("prix", NumberType::class,)
             ->add("published",CheckboxType::class)
+            
            
             ->add('photo', FileType::class, [
                 'mapped' => false,

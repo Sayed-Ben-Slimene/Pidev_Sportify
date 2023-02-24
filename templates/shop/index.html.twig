@@ -17,20 +17,16 @@
 													<div class="tg-shopcontent">
 														<span class="tg-limitedoffer">limited offer</span>
 														<div class="tg-contentbox">
-															<a class="tg-theme-tag" href="#">mens wear</a>
-															<h2>Yellow Sports shoes</h2>
+															
+															<h2>ACHETER SUR SPORTIFY.TN</h2>
 															<span class="tg-price">
 																<del>$ 256</del>
 																/ $200</span>
-															<span class="tg-stars">
-																<span></span>
-															</span>
+															
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-5 hidden-sm hidden-xs">
-													<figure><img src="images/shop/img-01.png" alt="image description"></figure>
-												</div>
+												
 											</div>
 										</div>
 										<div class="swiper-slide">
@@ -136,11 +132,13 @@
 								</fieldset>
 							</form>
 						</div>
-						{% for p in products %}
-							<div class="th-products tg-shoplist">
+
+						<div class="th-products tg-shoplist">
+							{% for p in products %}
 								<div class="tg-product">
+
 									<figure class="tg-productimg">
-										<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/'~p.photo)}}">
+										<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/miniature/'~p.photo )}}"/>
 									</figure>
 									<div class="tg-productinfo">
 										<a class="tg-theme-tag" href="#">Mens wear</a>
@@ -149,52 +147,83 @@
 												<a href="#">{{p.title}}</a>
 											</h2>
 										</div>
-										<div class="tg-producttitle">
-											<h2>
-												<a href="#">{{p.category.label}}</a>
-											</h2>
+										<div class="tg-productprice">
+											<h3>{{p.category.label}}</h3>
 										</div>
 										<div class="tg-productprice">
 											<h3>{{p.prix}}</h3>
 										</div>
-										<span class="tg-stars">
-											<span></span>
-										</span>
+
+
 										<div class="tg-description">
 											<p>{{p.description}}</p>
 										</div>
-										<div class="tg-productcolorsize">
-											<div class="tg-productsize">
-												<span>Size:</span>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="s1" checked>
-													<label class="tg-sizeone" for="s1">s</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="m1">
-													<label class="tg-sizetwo" for="m1">m</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="l1">
-													<label class="tg-sizethree" for="l1">l</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="xl1">
-													<label class="tg-sizefour" for="xl1">xl</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="xxl1">
-													<label class="tg-sizefive" for="xxl1">xxl</label>
-												</div>
-											</div>
 
-										</div>
+										<span class="tg-productquentity">
+											<em class="minus">-</em>
+											<input type="text" class="result" value="01" id="quantity1" name="quantity">
+											<em class="plus">+</em>
+										</span>
 
-										<a class="tg-btn tg-btnaddtocart" href="{{path('add_panier',{id:p.id})}}">add to cart</a>
 									</div>
+									<a class="tg-btn tg-btnaddtocart" href=" {{path('add_panier',{id:p.id} )}}">add to cart</a>
 								</div>
+
+
 							{% endfor %}
 
+						</div>
+						<div class="col-md-3 col-sm-4 col-xs-12">
+							<aside id="tg-sidebar" class="tg-sidebar"></div>
+							<div class="col-md-3 col-sm-4 col-xs-12">
+								<aside id="tg-sidebar" class="tg-sidebar"></aside>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-4 col-xs-12">
+							<aside id="tg-sidebar" class="tg-sidebar">
+								<div class="tg-widget tg-search">
+									<form class="form-search">
+										<fieldset>
+											<input type="search" placeholder="Search Here" class="form-control">
+											<button type="submit">
+												<i class="fa fa-search"></i>
+											</button>
+										</fieldset>
+									</form>
+								</div>
+								<div class="tg-widget tg-catagories-widget">
+									<h3>catagories</h3>
+									<ul>
+										<li><a href="#"><em>VETEMENTS</em><i></i></a></li>
+										<li><a href="#"><em>ACCESSOIRES</em><i></i></a></li>
+										<li><a href="#"><em>CHAUSSURES</em><i></i></a></li>
+
+									</ul>
+								</div>
+								<div class="tg-widget tg-price-widget">
+									<h3>filter by price</h3>
+									<div class="tg-price-range">
+										<div id="tg-slider-range" class="tg-slider-range"></div>
+										<p>
+											<label for="amount">Price:</label>
+											<input type="text" id="amount" readonly>
+										</p>
+										<a class="tg-btn" href="#">Filter</a>
+									</div>
+								</div>
+
+								<div class="tg-widget tg-tags-widget">
+									<h3>popular tags</h3>
+									<ul>
+										<li><a class="tg-btn" href="#">fashion</a></li>
+										
+										<li><a class="tg-btn" href="#">sports</a></li>
+										<li><a class="tg-btn" href="#">blog</a></li>
+										<li><a class="tg-btn" href="#">magazine</a></li>
+										
+									</ul>
+								</div>
+							</aside>
 						</div>
 					</div>
 				</div>

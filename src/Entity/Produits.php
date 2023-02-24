@@ -50,6 +50,8 @@ class Produits
 
     
 
+    
+
    
 
     public function getId(): ?int
@@ -130,6 +132,8 @@ class Produits
 
         return $this;
     }
+
+   
 
     
 }

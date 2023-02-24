@@ -172,6 +172,7 @@ input:focus,
 	text-align: center;
 	font-family: 'FontAwesome';
 }
+
 .tg-select select {
 	width: 100%;
 	z-index: 1;

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use id;
+use App\Repository\PanierRepository;
+
 use App\Repository\ProduitsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,13 +16,13 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\session;
 class PanierController extends AbstractController
 {
     #[Route('/panier', name: 'panier_index')]
-    public function index(SessionInterface $session ,ProduitsRepository $repository )
+    public function index(SessionInterface $session ,ProduitsRepository $productrepository )
     {
-        $panier = $session->get('panier',[]);
-        $panierWithData=[];
+        $panier = $session->get('panier', []);
+        $panierWithData = [];
         foreach($panier as $id=>$quantity){
-            $panierWithData[]=[
-                'produit'=>$repository->find($id),
+            $panierWithData[] = [
+                'produit' => $productrepository->find($id),
                 'quantity'=>$quantity
 
             ];
@@ -35,13 +38,14 @@ class PanierController extends AbstractController
             'items' => $panierWithData,
             'total'=>$total,
         ]);
+      
     }
     #[Route('/panier/add{id}', name: 'add_panier')]
-    public function add($id,SessionInterface $session)
+    public function add($id,SessionInterface $session,PanierRepository $productrepository )
 
     {
         
-        $panier=$session->get('panier',[]);
+        $panier = $session->get('panier', []);
         if(!empty($panier[$id])){
             $panier[$id]++;
         }else{
@@ -49,6 +53,7 @@ class PanierController extends AbstractController
         }
         
         $session->set('panier',$panier);
+       
         return $this->redirectToRoute("panier_index");
         
         
