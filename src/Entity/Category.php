@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -14,14 +15,17 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("produit")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("produit")]
     #[Assert\Length( min: 3, minMessage: 'label doit avoir au minimum 3 caracteres',)]
     #[Assert\NotBlank(message: "vous devez mettre le label !!!")]
     private ?string $label = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produits::class)]
+    
     private Collection $produits;
 
     public function __construct()

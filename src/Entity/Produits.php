@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitsRepository;
+use Assert\NotBlank;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitsRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Assert\NotBlank;
 
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
@@ -15,36 +16,47 @@ class Produits
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    #[Groups("produit")]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("produit")]
     #[Assert\Length( min: 3, minMessage: 'title doit avoir au minimum 3 caracteres',)]
     #[Assert\NotBlank(message: "vous devez mettre le title !!!")]
     
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("produit")]
     #[Assert\Length( min: 10, max: 1000, minMessage: 'Vous devez decrire plus de details ',)]
     #[NotBlank(message: "vous devez mettre le description !!!")]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups("produit")]
    
     private ?bool $published = null;
 
     
 
     #[ORM\Column (type: Types::DECIMAL, precision: 10, scale: '0')]
+    #[Groups("produit")]
     #[Assert\Positive(message:" donner un prix réel en dinar")]
     #[Assert\NotBlank(message: "vous devez mettre le prix !!!")]
     private ?float $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[Groups("produit")]
     #[ORM\JoinColumn(nullable: false)]
+    
+    #[ORM\JoinColumn(onDelete: "CASCADE={persist}")]
+    
+
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
+   
     
     private ?string $photo = null;
 
