@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Assert\NotBlank;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,7 +52,7 @@ class Produits
     #[Groups("produit")]
     #[ORM\JoinColumn(nullable: false)]
     
-    #[ORM\JoinColumn(onDelete: "CASCADE={persist}")]
+    
     
 
     private ?Category $category = null;
@@ -59,6 +61,14 @@ class Produits
    
     
     private ?string $photo = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Panier::class)]
+    private Collection $paniers;
+
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+    }
 
     
 
@@ -141,6 +151,36 @@ class Produits
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers->add($panier);
+            $panier->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getProduit() === $this) {
+                $panier->setProduit(null);
+            }
+        }
 
         return $this;
     }

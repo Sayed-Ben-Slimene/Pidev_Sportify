@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PanierRepository;
+use App\Entity\Produits;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PanierRepository;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
@@ -12,12 +13,16 @@ class Panier
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
 
     #[ORM\Column]
     private ?int $quantite = null;
 
     #[ORM\Column]
     private ?int $total = null;
+
+    #[ORM\ManyToOne(targetEntity: Produits::class)]
+    private ?Produits $produit = null;
 
     public function getId(): ?int
     {
@@ -44,6 +49,18 @@ class Panier
     public function setTotal(int $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produits
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produits $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

@@ -24,15 +24,24 @@
 				{% for item in items %}
 					<tr>
 						<td>{{item.produit.title}}</td>
-						<td>{{item.produit.prix}}</td>
-						<td>{{item.quantity}}</td>
-						<td>{{item.produit.prix * item.quantity}}</td>
+						<td>{{item.produit.prix}}TND</td>
+						<td>
+							<span class="tg-productquentity">
+								<a href="{{path('dec_panier',{id:item.produit.id})}}" class="minus">-</a>
+								<input type="text" class="result" value="{{item.quantite}}" id="quantity1" name="quantity">
+								<a href="{{path('add_panier',{id:item.produit.id})}}" class="plus">+</a>
+							</span>
+						</td>
+
+
+						<td>{{item.produit.prix * item.quantite}}</td>
 						<td>
 							<a href="{{path('remove_panier',{id:item.produit.id})}}" class=" a.btn.btn-danger.btn-sm">
 								<i class="fas fa-trash"></i>
 							</a>
 
 						</td>
+
 					</tr>
 				{% endfor %}
 
