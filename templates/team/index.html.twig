@@ -1,0 +1,52 @@
+{% extends 'AdminBase.html.twig' %}
+
+{% block title %}Team index{% endblock %}
+
+{% block body %}
+    <h1 class="header text-white page-header font-16"> All Teams </h1>
+<div id="main_content">
+    <div class="page-loader-wrapper">
+        <div class="loader">
+        </div>
+    </div>
+    <div class="section-body mt-3">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                             <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>PlayerList</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.name }}</td>
+                <td>{{ team.playerList ? team.playerList|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('app_team_show', {'id': team.id}) }}">show</a>
+                    <a href="{{ path('app_team_edit', {'id': team.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn width150 btn-primary" href="{{ path('app_team_new') }}">Create new</a>
+{% endblock %}

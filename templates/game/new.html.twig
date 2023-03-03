@@ -1,0 +1,12 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}New Game{% endblock %}
+
+{% block body %}
+    <h1>Create new Game</h1>
+    <div class="container">
+        {{ include('game/_form.html.twig') }}
+    </div>
+
+    <a href="{{ path('app_game_index') }}">back to list</a>
+{% endblock %}

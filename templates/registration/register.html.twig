@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    {% block title %}
+        <title>Login</title>
+    {% endblock %}
+
+    {% block css %}
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="{{ asset('AccountUser/stylelogin.css') }}">
+    {% endblock %}
+</head>
+{% block body %}
+<body>
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto" >
+                        <div class="card-3d-wrapper" >
+                            <div class="card-front" style="height:250% ;">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                                        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                                        <form>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.nom,{'attr':{'class':'form-style','placeholder':'nom'}}) }}
+                                                {% if form_errors(form.nom) is not empty %}
+                                                    <div class="alert text-warning" >
+                                                        {{ form_errors(form.nom) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.prenom,{'attr':{'class':'form-style','placeholder':'prenom'}}) }}
+                                                {% if form_errors(form.prenom) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.prenom) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.adress,{'attr':{'class':'form-style','placeholder':'adresse'}}) }}
+                                                {% if form_errors(form.adress) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.adress) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil-location-point"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.tel,{'attr':{'class':'form-style','placeholder':'téléphone'}}) }}
+                                                {% if form_errors(form.tel) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.tel) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil-calling"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.email,{'attr':{'class':'form-style','placeholder':'email'}}) }}
+                                                {% if form_errors(form.email) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.email) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.password.first,{'attr':{'class':'form-style','placeholder':'password'}}) }}
+                                                {% if form_errors(form.password.first) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.password.first) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                {{ form_widget(form.password.second,{'attr':{'class':'form-style','placeholder':'password'}}) }}
+                                                {% if form_errors(form.password.second) is not empty %}
+                                                    <div class="alert text-danger" >
+                                                        {{ form_errors(form.password.second) }}
+                                                    </div>
+                                                {% endif %}
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <button class="btn mt-4">{{ button_label|default('Enregistrer') }}</button>
+                                            <p class="mb-0 mt-4 text-center"><a href="{{ path('homepage') }}" class="link">Retour à l'accueil</a></p>
+                                        </form>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock %}

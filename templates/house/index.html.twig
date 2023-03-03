@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}match
+{% endblock %}
+
+{% block body %}
+	<section class="tg-main-section tg-haslayout">
+		<div class="container">
+			<div class="tg-section-name">
+				<h2>Latest Match
+				</h2>
+			</div>
+			<div class="col-sm-11 col-xs-11 pull-right">
+				<div class="row">
+					<div class="tg-blogpost">
+						{% for ac in games %}
+							<div class="row">
+								<div class="col-sm-6 col-xs-8">
+									<article class="tg-post">
+										<figure class="tg-postimg">
+											<figcaption>
+												<ul class="tg-postmetadata">
+													<li>
+														<a href="#">
+															{{ ac.team1 }}
+														</a>
+													</li>
+													<li>
+														<a href="#">
+															{{ ac.team2  }}
+														</a>
+													</li>
+
+												</ul>
+											</figcaption>
+										</figure>
+										<div class="tg-posttitle">
+											<h3></h3>
+										</div>
+										<div class="tg-description">
+											<p>{{ac.score_team1}}.</p>
+										</div>
+										<a class="tg-btn" href="{{ path('app_game_index', {'id': ac.id}) }}"></a>
+
+
+									</article>
+								</div>
+
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

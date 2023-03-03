@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		{% block title %}
+			<title>Login</title>
+		{% endblock %}
+
+		{% block css %}
+			<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+			<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+			<link rel="stylesheet" href="{{ asset('AccountUser/stylelogin.css') }}">
+		{% endblock %}
+	</head>
+	{% block body %}
+		<body>
+			<div class="section">
+				<div class="container">
+					<div class="row full-height justify-content-center">
+						<div class="col-12 text-center align-self-center py-5">
+							<div class="section pb-5 pt-5 pt-sm-2 text-center">
+								<label for="reg-log"></label>
+								<div class="card-3d-wrap mx-auto">
+									<div class="card-3d-wrapper">
+										<div class="card-front" style="height:115% ;">
+											<div class="center-wrap">
+												<div class="section text-center">
+													<h4 class="mb-4 pb-3">Connectez-vous à votre compte Sportify</h4>
+													<form method="post">
+														{% if error %}
+															<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+														{% endif %}
+
+														{% if app.user %}
+															<div class="mb-3">
+																You are logged in as
+																{{ app.user.userIdentifier }},
+																<a href="{{ path('app_logout') }}">Logout</a>
+															</div>
+														{% endif %}
+														<div class="form-group">
+															<label for="logemail"></label><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-style" placeholder="E-mail" autocomplete="off">
+															<i class="input-icon uil uil-at"></i>
+														</div>
+														<div class="form-group mt-2">
+															<label for="logpass"></label><input type="password" name="password" id="inputPassword" class="form-style" placeholder="Mot de passe" autocomplete="off">
+															<i class="input-icon uil uil-lock-alt"></i>
+														</div>
+														<button type="submit" class="btn mt-4">Se Connecter</button>
+														<p class="mb-0 mt-4 text-center">
+															<a href="{{ path('pass_forget') }}" class="alert-link">Mot de passe oublié?</a>
+														</p>
+														<p class="mb-0 mt-4 text-center">Vous n'avez pas de compte ?
+															<a href="{{ path('pass_forget') }}" class="alert-link">Inscrivez-vous</a>
+														</p>
+														<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</body>
+	{% endblock %}
+</html>

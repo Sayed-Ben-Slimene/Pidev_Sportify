@@ -1,0 +1,48 @@
+{% extends 'AdminBase.html.twig' %}
+
+{% block title %}New Team{% endblock %}
+{% block js %}
+{{ parent() }}
+<script>
+    const buttons = $(".btn-new");
+    const form = $('form');
+    buttons.on('click',function(){
+        const newPlayer = $(this).parent().clone(true)
+        newPlayer.attr('name',`player-${new Date()}`);
+        console.log(newPlayer.find('input').attr('name',`palyer-${Date.now()}`))
+        form.append(newPlayer);
+    })
+    console.log(button);
+</script>
+{% endblock %}
+{% block body %}
+    <h1>Create new Team</h1>
+<div id="main_content">
+    <div class="page-loader-wrapper">
+        <div class="loader">
+        </div>
+    </div>
+    <div class="section-body mt-3">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" id="team" name="team">
+                                <label for="teamName"> team name </label>
+                                <input id="teamName" class="form-control" name="team name">
+                                <label for="player"> palyers</label>
+                                <div class="row m-2">
+                                    <input id="player" class="form-control" style="width: 80%;margin-right: 5px;" name="player">
+                                    <button class="btn btn-primary btn-new"  type="button">new</button>
+                                </div>
+                            </form>
+                            <button form="team" class="btn btn-success mt-1" type="submit"> save  </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('app_team_index') }}">back to list</a>
+{% endblock %}
