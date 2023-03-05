@@ -47,6 +47,9 @@ class ProduitsRepository extends ServiceEntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+   
+
+    
 
 //    /**
 //     * @return Produits[] Returns an array of Produits objects

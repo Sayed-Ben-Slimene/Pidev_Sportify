@@ -17,16 +17,16 @@
 													<div class="tg-shopcontent">
 														<span class="tg-limitedoffer">limited offer</span>
 														<div class="tg-contentbox">
-															
+
 															<h2>ACHETER SUR SPORTIFY.TN</h2>
 															<span class="tg-price">
 																<del>$ 256</del>
 																/ $200</span>
-															
+
 														</div>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 										<div class="swiper-slide">
@@ -134,7 +134,7 @@
 						</div>
 
 						<div class="th-products tg-shoplist">
-							{% for p in products %}
+							{% for p in pagination %}
 								<div class="tg-product">
 
 									<figure class="tg-productimg">
@@ -159,14 +159,19 @@
 											<p>{{p.description}}</p>
 										</div>
 
-										
 
 									</div>
 									<a class="tg-btn tg-btnaddtocart" href=" {{path('add_panier',{id:p.id} )}}">add to cart</a>
+
 								</div>
 
 
 							{% endfor %}
+
+							<ul class="tg-pagination">
+								{{ knp_pagination_render(pagination) }}
+							</ul>
+
 
 						</div>
 						<div class="col-md-3 col-sm-4 col-xs-12">
@@ -189,34 +194,42 @@
 								</div>
 								<div class="tg-widget tg-catagories-widget">
 									<h3>catagories</h3>
-									<ul>
-										<li><a href="#"><em>VETEMENTS</em><i></i></a></li>
-										<li><a href="#"><em>ACCESSOIRES</em><i></i></a></li>
-										<li><a href="#"><em>CHAUSSURES</em><i></i></a></li>
+									{% for c in categories %}
 
-									</ul>
+
+										<ul>
+											<li><a href="#"><em>{{c.label}}</em><i></i></a></li>
+
+
+										</ul>
+
+									{% endfor %}
+
 								</div>
+
 								<div class="tg-widget tg-price-widget">
 									<h3>filter by price</h3>
-									<div class="tg-price-range">
-										<div id="tg-slider-range" class="tg-slider-range"></div>
-										<p>
-											<label for="amount">Price:</label>
-											<input type="text" id="amount" readonly>
-										</p>
+									<form id="filter-form">
+										<label for="min-price">Prix minimum:</label>
+										<input type="number" name="min-price" id="min-price">
+
+										<label for="max-price">Prix maximum:</label>
+										<input type="number" name="max-price" id="max-price">
+
 										<a class="tg-btn" href="#">Filter</a>
-									</div>
+									</form>
+
 								</div>
 
 								<div class="tg-widget tg-tags-widget">
 									<h3>popular tags</h3>
 									<ul>
 										<li><a class="tg-btn" href="#">fashion</a></li>
-										
+
 										<li><a class="tg-btn" href="#">sports</a></li>
 										<li><a class="tg-btn" href="#">blog</a></li>
 										<li><a class="tg-btn" href="#">magazine</a></li>
-										
+
 									</ul>
 								</div>
 							</aside>

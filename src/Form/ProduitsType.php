@@ -27,7 +27,7 @@ class ProduitsType extends AbstractType
                     'choice_label'=>'label'
                 ))
             ->add("description",TextareaType::class)
-            ->add("prix", NumberType::class,)
+            ->add("prix", NumberType::class)
             ->add("published",CheckboxType::class)
             
            

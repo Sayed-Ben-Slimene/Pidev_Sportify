@@ -24,6 +24,12 @@ class Panier
     #[ORM\ManyToOne(targetEntity: Produits::class)]
     private ?Produits $produit = null;
 
+    
+
+   
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +70,20 @@ class Panier
 
         return $this;
     }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    
+
+   
 }

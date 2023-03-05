@@ -1,20 +1,99 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello CommandeController!{% endblock %}
-
+{% block title %}commande
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="bg-light p-3">
+		<h1>PREMIERE ETAPE</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	</div>
+	<div id="main_content">
+		<div class="section-body">
+			<div class="container-fluid">
+				<div class="row clearfix">
+					<div class="col-md-12">
+						<div class="tab-content">
+							<div class="tab-pane active show" id="Company_Settings">
+								<div class="card">
+									<div class="card-body">
+										{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+										<form>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/LENOVO/Pidev/src/Controller/CommandeController.php'|file_link(0) }}">src/Controller/CommandeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/LENOVO/Pidev/templates/commande/index.html.twig'|file_link(0) }}">templates/commande/index.html.twig</a></code></li>
-    </ul>
-</div>
+											<div class="form-group">
+												{{ form_label(form.nom,"nom") }}
+												{{ form_widget(form.nom,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.nom) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.nom) }}
+													</div>
+												{% endif %}
+											</div>
+											<div class="form-group">
+												{{ form_label(form.prenom,"prénom") }}
+												{{ form_widget(form.prenom,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.prenom) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.prenom) }}
+													</div>
+												{% endif %}
+											</div>
+											<div class="form-group">
+												{{ form_label(form.email,"email") }}
+												{{ form_widget(form.email,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.email) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.email) }}
+													</div>
+												{% endif %}
+											</div>
+
+
+											<div class="form-group">
+												{{ form_label(form.num_tel,"numéro de téléphone") }}
+												{{ form_widget(form.num_tel,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.num_tel) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.num_tel) }}
+													</div>
+												{% endif %}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.adresse,"adresse") }}
+												{{ form_widget(form.adresse,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.adresse) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.adresse) }}
+													</div>
+												{% endif %}
+											</div>
+
+
+											<div class="form-group">
+												{{ form_label(form.mode_paiement,"mode de paiement") }}
+												{{ form_widget(form.mode_paiement,{ 'attr': {'class': 'form-control'} }) }}
+												{% if form_errors(form.mode_paiement) is not empty %}
+													<div class="alert alert-danger">
+														{{ form_errors(form.mode_paiement) }}
+													</div>
+												{% endif %}
+												<p>Total : {{ total }} TND</p>
+											</div>
+											
+												<input type="submit"  class="tg-btn tg-btnaddtocart" value="suivant">
+											
+
+											<a class="tg-btn tg-btnaddtocart" href=" {{path('panier_index' )}}">retour</a>
+
+
+											{{ form_end(form) }}
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

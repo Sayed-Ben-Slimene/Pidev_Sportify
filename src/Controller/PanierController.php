@@ -5,6 +5,7 @@ namespace App\Controller;
 use id;
 use App\Entity\Panier;
 
+
 use App\Repository\PanierRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +40,7 @@ class PanierController extends AbstractController
     foreach ($panierWithData as $item) {
         $totalItem = $item->getProduit()->getPrix() * $item->getQuantite();
         $total += $totalItem;
+        
     }
 
     return $this->render('panier/index.html.twig', [
@@ -46,6 +48,7 @@ class PanierController extends AbstractController
         'total' => $total,
     ]);
 }
+
 #[Route('/panier/add{id}', name: 'add_panier')]
 public function add($id, SessionInterface $session, PanierRepository $panierRepository)
 {
@@ -89,6 +92,9 @@ public function remove($id, SessionInterface $session, EntityManagerInterface $e
     }
     return $this->redirectToRoute("panier_index");
 }
+
+
+
 
 
    
