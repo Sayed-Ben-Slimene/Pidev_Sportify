@@ -2,44 +2,69 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
-use Stripe\Charge;
+
 use Stripe\Stripe;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Stripe\Customer;
+use App\Entity\Produits;
+use Stripe\Checkout\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PaiementController extends AbstractController
 {
-    #[Route('/paiement', name: 'paiement')]
-    public function payer(Request $request): Response
-    {
-        // Configurez la clé secrète de l'API Stripe
-        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+    
+  
+    #[Route('/checkout', name: 'app_checkout')]
+    public function checkout(SessionInterface $session): Response
+{
+    Stripe::setApiKey('sk_test_51MZfm3GsPvc9FYkvuVjIT8w89ZcGO7UpXvkpu6rlIwDMTsUxvZx2fhgjz5z4JyUJgRyWjlSa41yaU4awBgJnx4FA00sSIYpMPn');
 
-        // Récupérez les informations du formulaire de paiement
-        $nom = $request->request->get('nom');
-        $email = $request->request->get('email');
-        $montant = $request->request->get('montant');
-        $token = $request->request->get('stripeToken');
-
-        // Créez un objet de charge avec les informations de carte de crédit
-        $charge = Charge::create([
-            'amount' => $montant * 100,
-            'currency' => 'eur',
-            'description' => 'Paiement en ligne',
-            'source' => $token,
-        ]);
-
-        // Enregistrez le résultat de la charge dans votre base de données
-        $commande = new Commande();
-        $commande->setNom($nom);
-        $commande->setEmail($email);
-        $commande->setMontant($montant);
-        $commande->setChargeId($charge->id);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist;
+    $panier = $session->get('panier', []);
+    $items = [];
+    $total = 0;
+    foreach ($panier as $id => $quantity) {
+        $product = $this->getDoctrine()->getRepository(Produits::class)->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('Produit non trouvé pour id '.$id);
+        }
+        $price = $product->getPrix();
+        $total += $price * $quantity;
+        $items[] = [
+            'price_data' => [
+                'currency' => 'eur',
+                'product_data' => [
+                    'name' => $product->getTitle(),
+                ],
+                'unit_amount' => $price * 100,
+            ],
+            'quantity' => $quantity,
+        ];
     }
+
+    $session = Session::create([
+        'payment_method_types' => ['card'],
+        'line_items' => $items,
+        'mode' => 'payment',
+        'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        'cancel_url' => $this->generateUrl('echec', [], UrlGeneratorInterface::ABSOLUTE_URL),
+    ]);
+
+    return $this->redirect($session->url, 303);
+}
+
+#[Route('/success', name: 'success')]
+public function success(){
+    return $this->render('paiement/success.html.twig');
+}
+#[Route('/echec', name: 'echec')]
+public function echec(){
+    return $this->render('paiement/echec.html.twig');
+}
+
+
 }

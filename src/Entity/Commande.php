@@ -45,6 +45,9 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    
+    
+
    
     
 
@@ -124,6 +127,8 @@ class Commande
 
         return $this;
     }
+
+    
 
     
 }
