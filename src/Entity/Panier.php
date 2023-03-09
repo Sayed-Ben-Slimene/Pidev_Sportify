@@ -12,16 +12,20 @@ class Panier
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("panier")]
     private ?int $id = null;
     
 
     #[ORM\Column]
+    #[Groups("panier")]
     private ?int $quantite = null;
 
     #[ORM\Column]
+    #[Groups("panier")]
     private ?int $total = null;
 
     #[ORM\ManyToOne(targetEntity: Produits::class)]
+    #[Groups("panier")]
     private ?Produits $produit = null;
 
     

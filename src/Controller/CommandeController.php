@@ -43,14 +43,14 @@ public function new(Request $request, CommandeRepository $commandeRepository, Pr
 
     if ($form->isSubmitted() && $form->isValid()) {
         // Sauvegardez la commande dans la base de données
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($commande);
-        $entityManager->flush();
-
-        // Videz le panier
-        $session->set('panier', []);
-
-        return $this->redirectToRoute('app_shop');
+        
+        
+        $commande->setPrixTotal($total);
+        
+        $commandeRepository->save($commande,true);
+        return  $this->redirectToRoute("app_checkout");
+        
+       
     }
 
     return $this->render('commande/index.html.twig', [
@@ -58,6 +58,36 @@ public function new(Request $request, CommandeRepository $commandeRepository, Pr
         'total' => $total, // Passez le prix total à la vue
     ]);
 }
+#[Route('/shop', name: 'app_shop')]
+public function index(ProduitsRepository $produitsRepository,CategoryRepository $categoriesRepository, PaginatorInterface $paginator, Request $request)
+{
+    $products = $produitsRepository->findAll();
+    $categories=$categoriesRepository->findAll();
+   
+    
+    $pagination = $paginator->paginate(
+        $products,
+        $request->query->getInt('page', 1),
+        5
+    );
+    
+   
+
+    return $this->render('shop/index.html.twig', [
+        'pagination' => $pagination,
+        'categories' => $categories,
+        
+        
+    ]);
+}
+#[Route('/list', name: 'list_commande')]
+    public function list(CommandeRepository $repository)
+    {
+        return $this->render('commande/list.html.twig', [
+            'produits' => $repository->findAll()
+        ]);
+    }
+
 
 
 }

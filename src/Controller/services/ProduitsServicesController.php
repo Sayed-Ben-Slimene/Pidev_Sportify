@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\services;
 
 use DateTime;
-use App\Entity\Category;
+use App\Entity\Panier;
 
+use App\Entity\Category;
 use App\Entity\Produits;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,24 +51,32 @@ class ProduitsServicesController extends AbstractController
         return $this->json($post,201,[],['groups'=>'produit']);
         
     }
-    #[Route('/produits/{id}', name: 'update_produits_services', methods: ['PUT'])]
+    
 
-#[Route('/produits/{id}', name: 'delete_produits_services', methods: ['DELETE'])]
-public function deleteProduits(EntityManagerInterface $em, $id)
-{
-    $produit = $em->getRepository(Produits::class)->find($id);
-
-    if (!$produit) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
+    #[Route('/produits/{id}', name: 'delete_produits_services', methods: ['DELETE'])]
+    public function deleteProduits(EntityManagerInterface $em, $id)
+    {
+        $produit = $em->getRepository(Produits::class)->find($id);
+    
+        if (!$produit) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+    
+        // Supprimer toutes les entrées dans la table panier qui référencent ce produit
+        $paniers = $em->getRepository(Panier::class)->findBy(['produit' => $produit]);
+        foreach ($paniers as $panier) {
+            $em->remove($panier);
+        }
+    
+        // Supprimer le produit lui-même
+        $em->remove($produit);
+        $em->flush();
+    
+        return $this->json(['message' => 'Product deleted'], 200);
     }
-
-    $em->remove($produit);
-    $em->flush();
-
-    return $this->json(['message' => 'Product deleted'], 200);
-}
+    
 #[Route('/produits/{id}', name: 'update_produits_services', methods: ['PUT'])]
 public function updateProduits(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, $id)
 {

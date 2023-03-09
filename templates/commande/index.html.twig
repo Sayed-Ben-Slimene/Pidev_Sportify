@@ -76,15 +76,13 @@
 														{{ form_errors(form.mode_paiement) }}
 													</div>
 												{% endif %}
-												<p>Total : {{ total }} TND</p>
+												<p>Total :
+													{{ total }}
+													TND</p>
 											</div>
-											
-												<input type="submit"  class="tg-btn tg-btnaddtocart"  href=" {{path('app_checkout' )}}"  value="acheter">
-												
-											<a class="tg-btn tg-btnaddtocart" href=" {{path('app_checkout' )}}">retour</a>
 
 
-											<a class="tg-btn tg-btnaddtocart" href=" {{path('panier_index' )}}">retour</a>
+											<input type="submit" class="tg-btn tg-btnaddtocart" value=" ajouter">
 
 
 											{{ form_end(form) }}

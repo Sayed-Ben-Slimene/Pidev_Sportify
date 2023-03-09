@@ -45,6 +45,9 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column]
+    private ?float $prix_total = null;
+
     
     
 
@@ -124,6 +127,18 @@ class Commande
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPrixTotal(): ?float
+    {
+        return $this->prix_total;
+    }
+
+    public function setPrixTotal(float $prix_total): self
+    {
+        $this->prix_total = $prix_total;
 
         return $this;
     }

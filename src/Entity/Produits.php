@@ -65,9 +65,13 @@ class Produits
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\ManyToMany(targetEntity: Paiement::class, mappedBy: 'relation')]
+    private Collection $paiements;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
+        $this->paiements = new ArrayCollection();
     }
 
     
@@ -180,6 +184,33 @@ class Produits
             if ($panier->getProduit() === $this) {
                 $panier->setProduit(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Paiement>
+     */
+    public function getPaiements(): Collection
+    {
+        return $this->paiements;
+    }
+
+    public function addPaiement(Paiement $paiement): self
+    {
+        if (!$this->paiements->contains($paiement)) {
+            $this->paiements->add($paiement);
+            $paiement->addRelation($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaiement(Paiement $paiement): self
+    {
+        if ($this->paiements->removeElement($paiement)) {
+            $paiement->removeRelation($this);
         }
 
         return $this;

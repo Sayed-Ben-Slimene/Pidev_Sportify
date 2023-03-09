@@ -15,11 +15,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("produit")]
+    #[Groups("category")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("produit")]
+    #[Groups("category")]
     #[Assert\Length( min: 3, minMessage: 'label doit avoir au minimum 3 caracteres',)]
     #[Assert\NotBlank(message: "vous devez mettre le label !!!")]
     private ?string $label = null;

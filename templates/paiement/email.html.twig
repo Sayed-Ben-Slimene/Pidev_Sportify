@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}success
+{% endblock %}
+{% block body %}
+
+
+	<p>Bonjour,</p>
+	<p>Votre paiement a été effectué avec succès. Voici les détails de votre commande :</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Produit</th>
+				<th>Prix unitaire</th>
+				<th>Quantité</th>
+				<th>Prix total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in items %}
+				<tr>
+					<td>{{ item.name }}</td>
+					<td>{{ item.price }}
+						€</td>
+					<td>{{ item.quantity }}</td>
+					<td>{{ item.price * item.quantity }}
+						€</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="3">Total</td>
+				<td>{{ total }}
+					€</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Merci de votre achat !</p>
+
+
+{% endblock %}
