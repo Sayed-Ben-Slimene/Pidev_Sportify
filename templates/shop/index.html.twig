@@ -134,30 +134,32 @@
 						</div>
 
 						<div class="th-products tg-shoplist">
+
 							{% for p in pagination %}
-								<div class="tg-product">
-									<div class="col-xl-8 col-lg-4 col-md-6">
+								<div class="tg-product tcell">
+									<div class="col-xl-8 col-lg-4 col-md-6 ">
 										<div class="embed-responsive embed-responsive-16by9">
 											<img class="card-img-top embed-responsive-item" src="{{asset('uploads/asset/produits/miniature/'~p.photo )}}"/>
 										</div>
 									</div>
 									<div class="tg-productinfo">
-										<a class="tg-theme-tag" href="#">Mens wear</a>
+										
 										<div class="tg-producttitle">
 											<h2>
-												<a href="#">{{p.title}}</a>
+												<a href="#"class="tcell" >{{p.title}}</a>
 											</h2>
 										</div>
 										<div class="tg-productprice">
-											<h3>{{p.category.label}}</h3>
+											<h3 >{{p.category.label}}</h3>
 										</div>
 										<div class="tg-productprice">
-											<h3>{{p.prix}}</h3>
+											<h3 >{{p.prix}}
+											</h3>
 										</div>
 
 
 										<div class="tg-description">
-											<p>{{p.description}}</p>
+											<p >{{p.description}}</p>
 										</div>
 
 
@@ -184,14 +186,10 @@
 						<div class="col-md-3 col-sm-4 col-xs-12">
 							<aside id="tg-sidebar" class="tg-sidebar">
 								<div class="tg-widget tg-search">
-									<form class="form-search">
-										<fieldset>
-											<input type="search" placeholder="Search Here" class="form-control">
-											<button type="submit">
-												<i class="fa fa-search"></i>
-											</button>
-										</fieldset>
-									</form>
+									<div class="pagetitle" style="text-align:center">
+
+										<input id="searchbar" onkeyup="chercherproduit()" type="text" name="search" placeholder="Search ..">
+									</div>
 								</div>
 								<div class="tg-widget tg-catagories-widget">
 									<h3>catagories</h3>
@@ -208,17 +206,10 @@
 
 								</div>
 
+
 								<div class="tg-widget tg-price-widget">
-									<h3>filter by price</h3>
-									<form id="filter-form">
-										<label for="min-price">Prix minimum:</label>
-										<input type="number" name="min-price" id="min-price">
+									{% include "shop/recherche.html.twig" %}
 
-										<label for="max-price">Prix maximum:</label>
-										<input type="number" name="max-price" id="max-price">
-
-										<a class="tg-btn" href="#">Filter</a>
-									</form>
 
 								</div>
 
@@ -236,6 +227,21 @@
 							</aside>
 						</div>
 					</div>
+					<script>
+						// JavaScript code
+function chercherproduit() {
+let input = document.getElementById('searchbar').value
+input = input.toLowerCase();
+let x = document.getElementsByClassName('tcell');
+for (i = 0; i < x.length; i ++) {
+if (! x[i].innerHTML.toLowerCase().includes(input)) {
+x[i].style.display = "none";
+} else {
+x[i].style.display = "list-item";
+}
+}
+}
+					</script>
 				</div>
 			</main>
 		{% endblock %}

@@ -48,12 +48,12 @@ class ProduitsController extends AbstractController
                 $produit->setPhoto($newFilename);
             }
              $repository->save($produit,true);
-             return  $this->redirectToRoute("list_produits");
+             return  $this->redirectToRoute("produits_list");
          }
          
         return $this->renderForm("produits/new.html.twig",["form"=>$form]);
     }
-    #[Route('/list', name: 'list_produits')]
+    #[Route('/list', name: 'produits_list')]
     public function list(ProduitsRepository $repository)
     {
         return $this->render('produits/list.html.twig', [
@@ -93,7 +93,7 @@ class ProduitsController extends AbstractController
 
             $em= $doctrine->getManager();
             $em->flush();
-            return  $this->redirectToRoute("list_produits");
+            return  $this->redirectToRoute("produits_list");
         }
         return $this->renderForm("produits/update.html.twig",["form"=>$form]);
     }
@@ -104,7 +104,7 @@ class ProduitsController extends AbstractController
         $em= $doctrine->getManager();
         $em->remove($produit);
         $em->flush();
-        return $this->redirectToRoute("list_produits");
+        return $this->redirectToRoute("produits_list");
     }
     #[Route('/showCategory/{id}', name: 'showCategory')]
     public function showCategory(ProduitsRepository $repo,$id,CategoryRepository $repository)

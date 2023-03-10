@@ -38,16 +38,7 @@ class ProduitsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function getProduitsByCategory($id)  {
-        $qb= $this->createQueryBuilder('p')
-            ->join('p.category','c')
-            ->addSelect('c')
-            ->where('c.id=:id')
-            ->setParameter('id',$id);
-        return $qb->getQuery()
-            ->getResult();
-    }
-   
+    
 
     
 
@@ -75,4 +66,20 @@ class ProduitsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function searchByPrix($min,$max) :array {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery('SELECT s FROM App\Entity\Produits s WHERE s.prix BETWEEN :min AND :max')
+        ->setParameter('min',$min)
+        ->setParameter('max',$max);
+    return $query->getResult();
+}
+public function getProduitByCategorie($id)  {
+    $qb= $this->createQueryBuilder('p')
+        ->join('p.classroom','c')
+        ->addSelect('c')
+        ->where('c.id=:id')
+        ->setParameter('id',$id);
+    return $qb->getQuery()
+        ->getResult();
+}
 }

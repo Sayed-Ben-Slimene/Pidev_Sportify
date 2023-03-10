@@ -1,0 +1,19 @@
+
+
+{% block body %}
+    <h1>Liste des produits</h1>
+    
+    <form method="GET" action="{{ path('app_shop_search') }}">
+        <label for="min">Prix minimum :</label>
+        <input type="text" id="min" name="min" value="{{ app.request.get('min') }}">
+        
+        <label for="max">Prix maximum :</label>
+        <input type="text" id="max" name="max" value="{{ app.request.get('max') }}">
+        
+        <button type="submit">Rechercher</button>
+    </form>
+    
+    
+    
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

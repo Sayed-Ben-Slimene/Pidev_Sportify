@@ -26,6 +26,7 @@ class Panier
 
     #[ORM\ManyToOne(targetEntity: Produits::class)]
     #[Groups("panier")]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Produits $produit = null;
 
     

@@ -80,13 +80,7 @@ public function index(ProduitsRepository $produitsRepository,CategoryRepository 
         
     ]);
 }
-#[Route('/list', name: 'list_commande')]
-    public function list(CommandeRepository $repository)
-    {
-        return $this->render('commande/list.html.twig', [
-            'produits' => $repository->findAll()
-        ]);
-    }
+
 
 
 

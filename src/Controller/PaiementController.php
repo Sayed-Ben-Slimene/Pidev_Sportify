@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 
+use id;
 use Stripe\Stripe;
 use Stripe\Customer;
+use Twilio\Rest\Client;
 use App\Entity\Commande;
 use App\Entity\Produits;
 use Stripe\Checkout\Session;
 use Symfony\Component\Mime\Address;
+use App\Repository\CommandeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +20,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Twilio\Rest\Client;
 
 class PaiementController extends AbstractController
 {
@@ -74,11 +77,35 @@ public function success(Request $request,SessionInterface $session): Response
 
     // Envoyer le SMS de confirmation
     $twilioSID = 'AC571ca3659d5ac729764975c897129e09';
-    $twilioToken = 'bf229b640b5d551afd4348f27db1a9d0';
+    $twilioToken = 'MG629480f1c7a3abe999108e651606726f';
     $twilio = new Client($twilioSID, $twilioToken);
     $message = $twilio->messages->create(
        
        "+21652492642",
+        array(
+            "messagingServiceSid" => "AC571ca3659d5ac729764975c897129e09",
+            'body' => 'Votre paiement a été accepté. Merci!'
+        )
+    );
+
+    return $this->render('paiement/success.html.twig');
+}
+
+/*#[Route('/success', name: 'success')]
+public function success(Request $request, SessionInterface $session, CommandeRepository $commandeRepository): Response
+{
+    // Récupérer la dernière commande créée
+    $commande = $commandeRepository->findOneBy([], ['id' => 'desc']);
+
+    // Récupérer le numéro de téléphone du client
+    $numeroTelephone = $commande->getNumTel();
+
+    // Envoyer le SMS de confirmation
+    $twilioSID = 'MG629480f1c7a3abe999108e651606726f';
+    $twilioToken = 'c818bd86648a519b38f1757871be4fe4';
+    $twilio = new Client($twilioSID, $twilioToken);
+    $message = $twilio->messages->create(
+        $numeroTelephone,
         array(
             "messagingServiceSid" => "MG629480f1c7a3abe999108e651606726f",
             'body' => 'Votre paiement a été accepté. Merci!'
@@ -86,7 +113,8 @@ public function success(Request $request,SessionInterface $session): Response
     );
 
     return $this->render('paiement/success.html.twig');
-}
+}*/
+
 
 
 
