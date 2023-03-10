@@ -1,0 +1,67 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Actualite index{% endblock %}
+
+{% block body %}
+    <h1>Actualite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Titre</th>
+                <th>Img</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actualite in actualites %}
+            <tr>
+                <td>{{ actualite.description }}</td>
+                <td>{{ actualite.date ? actualite.date|date('Y-m-d') : '' }}</td>
+                <td>{{ actualite.titre }}</td>
+                <td>{{ actualite.img }}</td>
+                <td>
+                    <a href="{{ path('app_actualite_show', {'id': actualite.id}) }}">show</a>
+                    <a href="{{ path('app_actualite_edit', {'id': actualite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Example Pagination ">
+        <ul class="pagination pg-blue">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="/actualite?page=1" class="page-link active-pagination1">1</a>
+            </li>
+            <li class="page-item">
+                <a href="/actualite?page=2" class="page-link">2</a>
+            </li>
+            <li class="page-item">
+                <a href="/actualite?page=3" class="page-link">3</a>
+            </li>
+            <li class="page-item">
+                <a href="/actualite?page=4" class="page-link">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <a href="{{ path('app_actualite_new') }}">Create new</a>
+{% endblock %}
