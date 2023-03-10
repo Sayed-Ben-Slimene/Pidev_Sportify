@@ -9,13 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateTime = null;
+    private ?\DateTimeInterface $datetime = null;
 
     #[ORM\ManyToOne(inversedBy: 'games')]
     private ?Team $team1 = null;
@@ -24,10 +25,11 @@ class Game
     private ?Team $team2 = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $scoreTeam1 = null;
+    private ?int $scoreteam1 = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $scoreTeam2 = null;
+    private ?int $scoreteam2 = null;
+
 
     public function getId(): ?int
     {
@@ -36,12 +38,12 @@ class Game
 
     public function getDateTime(): ?\DateTimeInterface
     {
-        return $this->dateTime;
+        return $this->datetime;
     }
 
     public function setDateTime(\DateTimeInterface $dateTime): self
     {
-        $this->dateTime = $dateTime;
+        $this->datetime = $dateTime;
 
         return $this;
     }
@@ -72,24 +74,24 @@ class Game
 
     public function getScoreTeam1(): ?int
     {
-        return $this->scoreTeam1;
+        return $this->scoreteam1;
     }
 
     public function setScoreTeam1(int $scoreTeam1): self
     {
-        $this->scoreTeam1 = $scoreTeam1;
+        $this->scoreteam1 = $scoreTeam1;
 
         return $this;
     }
 
     public function getScoreTeam2(): ?int
     {
-        return $this->scoreTeam2;
+        return $this->scoreteam2;
     }
 
     public function setScoreTeam2(int $scoreTeam2): self
     {
-        $this->scoreTeam2 = $scoreTeam2;
+        $this->scoreteam2 = $scoreTeam2;
 
         return $this;
     }

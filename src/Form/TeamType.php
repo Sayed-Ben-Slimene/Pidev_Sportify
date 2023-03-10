@@ -14,13 +14,18 @@ class TeamType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name',TextType::class);
+        $builder->add('img', FileType::class, [
+            'mapped' => false,
+            'required' => true,
+            'label' => 'Chose an image'
+        ]);
+
+        $builder->add('name', TextType::class);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
             $form->add('playerList');
-        });
-        ;
+        });;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,49 +1,56 @@
 {% extends 'adminBase.html.twig' %}
 
-{% block title %}Game index{% endblock %}
+{% block title %}Game index
+{% endblock %}
 
 {% block body %}
-    <h1>Game index</h1>
-    <div class="row clearfix">
-        <div class="col-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Games</h3>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Match date</th>
-                                <th>First Team</th>
-                                <th>Score</th>
-                                <th>Second Team</th>
-                                <th>Score</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for game in games %}
-                                <tr>
-                                <td>{{ game.id }}</td>
-                                <td>{{ game.dateTime | date }}</td>
-                                <td class="bg-primary text-white">
-                                    {{ game.team1.name }}
-                                </td>
-                                <td class="bg-primary text-white">{{ game.scoreTeam1 }}</td>
-                                <td class="bg-secondary text-white">{{ game.team2.name }}</td>
-                                <td class="bg-secondary text-white">{{ game.scoreTeam2 }}</td>
-                                <td><span class="tag tag-success"> <a href="{{ path('app_game_edit', {'id': game.id}) }}" style="text-decoration: none; color: white;"> Edit score </a></span></td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="btn btn-primary" href="{{ path('app_game_new') }}">Create new</a>
+	<h1>Game index</h1>
+	<div class="row clearfix">
+		<div class="col-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Games</h3>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Match date</th>
+									<th>First Team</th>
+									<th>Score</th>
+									<th>Second Team</th>
+									<th>Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for game in games %}
+									<tr>
+										<td>{{ game.id }}</td>
+										<td>{{ game.dateTime | date }}</td>
+										<td class="bg-primary text-white">
+											{{ game.team1.name }}
+										</td>
+										<td class="bg-primary text-white">{{ game.scoreTeam1 }}</td>
+										<td class="bg-secondary text-white">{{ game.team2.name }}</td>
+										<td class="bg-secondary text-white">{{ game.scoreTeam2 }}</td>
+										<td>
+
+											<a href="{{ path('app_team_show', {'id': game.id}) }}">Show</a><br>
+											<a href="{{ path('app_game_edit', {'id': game.id}) }}">Edit
+											</a>
+
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a class="btn btn-primary" href="{{ path('app_game_new') }}">Create new</a>
 
 {% endblock %}

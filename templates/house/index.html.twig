@@ -1,56 +1,163 @@
-{% extends 'base.html.twig' %}
+{% extends 'Base_front.html.twig' %}
 
-{% block title %}match
+{% block title %}Game index
 {% endblock %}
 
 {% block body %}
-	<section class="tg-main-section tg-haslayout">
-		<div class="container">
-			<div class="tg-section-name">
-				<h2>Latest Match
-				</h2>
-			</div>
-			<div class="col-sm-11 col-xs-11 pull-right">
-				<div class="row">
-					<div class="tg-blogpost">
-						{% for ac in games %}
-							<div class="row">
-								<div class="col-sm-6 col-xs-8">
-									<article class="tg-post">
-										<figure class="tg-postimg">
-											<figcaption>
-												<ul class="tg-postmetadata">
-													<li>
-														<a href="#">
-															{{ ac.team1 }}
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															{{ ac.team2  }}
-														</a>
-													</li>
 
-												</ul>
-											</figcaption>
-										</figure>
-										<div class="tg-posttitle">
-											<h3></h3>
-										</div>
-										<div class="tg-description">
-											<p>{{ac.score_team1}}.</p>
-										</div>
-										<a class="tg-btn" href="{{ path('app_game_index', {'id': ac.id}) }}"></a>
-
-
-									</article>
+	<div class="row clearfix">
+		<div class="col-12 col-sm-12">
+			<div class="card">
+				<div class="card-header"></div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<section class="tg-main-section tg-haslayout">
+							<div class="container">
+								<div class="tg-section-name">
+									<h2>latest result</h2>
 								</div>
 
+
+								<div class="table-responsive">
+									<table class="table">
+										<tbody>
+											{% for course in courses %}
+												<div class="col-sm-11 col-xs-11 pull-right">
+													<div class="row">
+														<div class="tg-latestresult">
+															<br>
+															<div class="row">
+																<div class="col-md-8 col-sm-12 col-xs-12">
+																	<div class="tab-content tg-tabscontent">
+																		<div role="tabpanel" class="tab-pane active" id="one">
+																			<div class="tg-matchresult">
+
+																				<div class="tg-box">
+																					<div class="tg-score">
+																						<h3>{{ course.getScoreTeam1() }}
+																							-
+																							{{ course.getScoreTeam2() }}</h3>
+																					</div>
+																					<div class="tg-teamscore">
+
+																						<div class="tg-team-nameplusstatus">
+																							<h4>
+																								<a href="#">{{ course.team2.getName() }}
+																								</a>
+																							</h4>
+																						</div>
+																						<ul class="tg-playernameplusgoadtime"></ul>
+																					</div>
+																					<div class="tg-teamscore">
+
+																						<div class="tg-team-nameplusstatus">
+																							<h4>
+																								<a href="#">{{ course.team2.getName() }}
+																								</a>
+																							</h4>
+																						</div>
+																						<ul class="tg-playernameplusgoadtime"></ul>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</tbody>
+											</tbody>
+										</tbody>
+									</tbody>
+								</table>
+								{{ knp_pagination_render(courses) }}
 							</div>
 						{% endfor %}
 					</div>
-				</div>
-			</div>
+				</section>
+
+				<section class=" tg-haslayout tg-bgstyleone">
+					<div class="tg-bgboxone"></div>
+					<div class="tg-bgboxtwo"></div>
+					<div class="tg-bgpattrant">
+						<div class="container">
+							<div class="row">
+								<div class="tg-upcomingmatch-counter">
+									<div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+										<figure>
+											<img src="{{asset('asset/images/img-02.png')}}" alt="image description">
+										</figure>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-12">
+										<div class="tg-contentbox">
+											<div class="tg-section-heading">
+												{% for game in ugames %}
+													<h2>{{ game.team2.name }}
+														<span>VS</span>
+														{{ game.team1.name }}</h2>
+												{% endfor %}
+											</div>
+											<div class="tg-counters">
+												<div class="tg-counter tg-days"><img src="{{asset('asset/images/trophy.png')}}" alt="image description"></div>
+
+											</div>
+											<div class="tg-btnbox">
+												<a class="tg-btn" href="{{ path('app_votes_new') }}">
+													<span>Guess score</span>
+												</a>
+												<a class="tg-btn" href="{{ path('app_time_front') }}">
+													<span>Calendried du match</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section class="tg-main-section tg-haslayout">
+					<div class="container">
+						<div class="tg-section-name">
+							<h2>About SPORTIFY</h2>
+						</div>
+						<div class="col-sm-11 col-xs-11 pull-right">
+							<div class="row">
+								<div class="tg-aboutussection">
+									<div class="row">
+										<div class="col-md-6 col-sm-12 col-xs-12">
+											<figure>
+												<img src="{{asset('asset/images/img-15.jpg')}}" alt="image description">
+											</figure>
+										</div>
+										<div class="col-md-6 col-sm-12 col-xs-12">
+											<div class="tg-contentbox">
+												<div class="tg-section-heading">
+													<h2>Site Web Pour Les FANS du Football</h2>
+												</div>
+												<div class="tg-description">
+													<p>Être au courant de l'actualité et Possibilité d'organiser des matchs entre vous et Possibilité d'achater nos produit sportive en ligne</p>
+												</div>
+												<div class="tg-btnbox">
+													<a class="tg-btn" href="#">
+														<span>read more</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</table>
+			{# _________________________________________________________________ #}
 		</div>
-	</section>
+	</div>
+
+
 {% endblock %}

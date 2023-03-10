@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\User;
+
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -15,9 +16,9 @@ class ProfileController extends AbstractController
 {
 
     #[Route('profile/{id}/', name: 'app_profile', methods: ['GET', 'POST'])]
-    public function editprofile(Request $request, User $user, UserRepository $userRepository , SluggerInterface $slugger): Response
+    public function editprofile(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(UserType::class, $user );
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,7 +37,7 @@ class ProfileController extends AbstractController
                 $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photo->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -63,7 +64,4 @@ class ProfileController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    
 }
-

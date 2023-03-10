@@ -19,15 +19,21 @@ class Team
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
-    private array $playerList = [];
+    private array $playerlist = [];
 
     #[ORM\OneToMany(mappedBy: 'team1', targetEntity: Game::class)]
     private Collection $games;
 
+    #[ORM\OneToMany(mappedBy: 'team2', targetEntity: UGame::class)]
+    private Collection $ugames;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
+        $this->ugames = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -48,15 +54,26 @@ class Team
 
     public function getPlayerList(): array
     {
-        return $this->playerList;
+        return $this->playerlist;
     }
 
     public function setPlayerList(?array $playerList): self
     {
-        $this->playerList = $playerList;
+        $this->playerlist = $playerList;
 
         return $this;
     }
+
+    // public function getImage(): ?string
+    // {
+    //     return $this->image;
+    // }
+    // public function setImage(?string $image): self
+    // {
+    //     $this->image = $image;
+
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Game>
@@ -75,10 +92,38 @@ class Team
 
         return $this;
     }
-
     public function removeGame(Game $game): self
     {
         if ($this->games->removeElement($game)) {
+            // set the owning side to null (unless already changed)
+            if ($game->getTeam1() === $this) {
+                $game->setTeam1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UGame>
+     */
+    public function getUgames(): Collection
+    {
+        return $this->ugames;
+    }
+
+    public function addUgame(UGame $game): self
+    {
+        if (!$this->ugames->contains($game)) {
+            $this->ugames->add($game);
+            $game->setTeam1($this);
+        }
+
+        return $this;
+    }
+    public function removeUgame(Game $game): self
+    {
+        if ($this->ugames->removeElement($game)) {
             // set the owning side to null (unless already changed)
             if ($game->getTeam1() === $this) {
                 $game->setTeam1(null);

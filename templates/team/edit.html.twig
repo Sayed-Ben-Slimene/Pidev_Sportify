@@ -1,17 +1,18 @@
 {% extends 'AdminBase.html.twig' %}
 
-{% block title %}Edit Team{% endblock %}
+{% block title %}Edit Team
+{% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
-        </div>
-    </div>
+	<div class="card">
+		<div class="card-body">
+			{{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
+		</div>
+	</div>
 
-    <h1>Edit Team</h1>
+	<h1>Edit Team</h1>
 
-    <a href="{{ path('app_team_index') }}">back to list</a>
+	<a href="{{ path('app_team_index') }}">back to list</a>
 
-    {{ include('team/_delete_form.html.twig') }}
+	{{ include('team/_delete_form.html.twig') }}
 {% endblock %}

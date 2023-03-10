@@ -22,6 +22,18 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Controller\VoteController:
+        tags: [controller.service_arguments]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+knp_paginator:
+    page_range: 5                      # Number of pages displayed in the pagination menu.
+    default_options:
+        page_name: page                # The name of the request parameter to use for pagination.
+        sort_field_name: sort          # The name of the request parameter to use for sorting.
+        sort_direction_name: direction # The name of the request parameter to use for sorting direction.
+        distinct: true                 # Whether to return only distinct results.
+    template:
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig'  # The default pagination template to use.
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # The default sorting template to use.

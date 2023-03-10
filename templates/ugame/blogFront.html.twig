@@ -1,0 +1,58 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Actualite
+{% endblock %}
+
+{% block body %}
+	<h1>Actualite</h1>
+
+	<section class="bg0 p-t-62 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-lg-9 p-b-80">
+					<div
+						class="p-r-45 p-r-0-lg">
+						<!-- item blog -->
+						{% for game in g %}
+
+							<div class="p-b-63">
+								<div class="flex-col-c-m size-123 bg9 how-pos5">
+									<span class="ltext-107 cl2 txt-center">
+										{{ game.date | date("d") }}
+									</span>
+
+									<span class="stext-109 cl3 txt-center">
+										{{ game.date | date("m/Y") }}
+									</span>
+								</div>
+							</a>
+							<div class="p-t-32">
+								<h4 class="p-b-1">
+									<a href="" class="ltext-108 cl2 hov-cl1 trans-04">
+										{{ game.id }}
+									</a>
+								</h4>
+								<div class="flex-w flex-sb-m p-t-18">
+									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
+
+										<span>
+											<span class="cl12 m-l-4 m-r-6">|</span>
+											{{ game.date | date("d/m/Y h:i:s") }}
+											<span class="cl12 m-l-4 m-r-6">|</span>
+										</span>
+
+									</span>
+
+
+								</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+
+
+	</div>
+</div></section>{% endblock %}

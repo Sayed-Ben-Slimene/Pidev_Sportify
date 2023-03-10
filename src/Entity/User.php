@@ -22,20 +22,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "vous devez mettre votre nom !")]
-    #[Assert\Length( min: 3, minMessage: 'Le nom doit avoir au minimum 3 caracteres !',)]
+    #[Assert\Length(min: 3, minMessage: 'Le nom doit avoir au minimum 3 caracteres !',)]
     private ?string $nom = null;
 
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "vous devez mettre votre mot de passe!!!")]
-    #[Assert\Length( min: 8, minMessage: 'Mode de passe doit avoir au minimum 8 caracteres !',)]
+    #[Assert\Length(min: 8, minMessage: 'Mode de passe doit avoir au minimum 8 caracteres !',)]
     private ?string $password = null;
 
     #[ORM\Column(type: 'json')]
     private ?array $roles = [];
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image  ="default.png";
+    private ?string $image  = "default.png";
 
     #[ORM\Column(length: 255)]
     private ?string $phone = null;

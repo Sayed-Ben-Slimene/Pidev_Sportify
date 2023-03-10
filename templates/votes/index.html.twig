@@ -1,0 +1,40 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Votes index
+{% endblock %}
+
+{% block body %}
+	<h1>Votes index</h1>
+	<div class="row clearfix">
+		<div class="col-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Games</h3>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
+							<tshead>
+								<tr>
+									<th>Match</th>
+									<th>Score HOME</th>
+									<th>Score AWAY</th>
+								</tr>
+							</thead>
+							{% for game in votes %}
+								<tbody>
+
+									<td>{{ game.ugame }}</td>
+									<td>{{ game.scoreteam1 }}</td>
+									<td>{{ game.scoreteam2 }}</td>
+								</tbody>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<a class="btn btn-primary" href="{{ path('app_votes_new') }}">Create new</a>{% endblock %}

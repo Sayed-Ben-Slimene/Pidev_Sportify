@@ -1,0 +1,52 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Game index
+{% endblock %}
+
+{% block body %}
+	<h1>Unplayed Game index</h1>
+	<div class="row clearfix">
+		<div class="col-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Unplayed Games</h3>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Match date</th>
+									<th>First Team</th>
+									<th>Second Team</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for game in ugames %}
+									<tr>
+										<td>{{ game.id }}</td>
+										<td>{{ game.dateTime | date }}</td>
+										<td class="bg-primary text-white">
+											{{ game.team1.name }}
+										</td>
+										<td class="bg-secondary text-white">
+											{{ game.team2.name }}
+										</td>
+										<td>
+
+											<a href="{{ path('app_team_show', {'id': game.id}) }}">Show</a><br>
+
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a class="btn btn-primary" href="{{ path('app_ugame_new') }}">Create new</a>
+
+{% endblock %}

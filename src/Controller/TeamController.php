@@ -28,8 +28,8 @@ class TeamController extends AbstractController
         if ($request->getMethod() === 'POST') {
             parse_str($request->getContent(), $data);
             $team->setName($data['team_name']);
-            $players =implode(",", array_slice($data,1));
-            $team->setPlayerList(explode(',',$players));
+            $players = implode(",", array_slice($data, 1));
+            $team->setPlayerList(explode(',', $players));
             $teamRepository->save($team, true);
 
             return $this->redirectToRoute('app_team_index', [], Response::HTTP_SEE_OTHER);
@@ -69,7 +69,7 @@ class TeamController extends AbstractController
     #[Route('/{id}', name: 'app_team_delete', methods: ['POST'])]
     public function delete(Request $request, Team $team, TeamRepository $teamRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $team->getId(), $request->request->get('_token'))) {
             $teamRepository->remove($team, true);
         }
 
